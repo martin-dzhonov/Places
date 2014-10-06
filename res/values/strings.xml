@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+     <string name="app_name">Test</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="details_button_text">Do something</string>
+    <string name="custom_list_label">Custom List View</string>
+    <string name="details_activity_label">Details</string>
+    <string name="details_text_view_default">Default name</string>
+</resources>
