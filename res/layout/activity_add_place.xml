@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <EditText
+        android:id="@+id/place_name_edit_text"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/place_name_hint" />
+
+    <EditText
+        android:id="@+id/place_description_edit_text"
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:hint="@string/place_description_hint" />
+
+    <Button
+        android:id="@+id/save_place_button"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/save_place_button_text" />
+
+</LinearLayout>

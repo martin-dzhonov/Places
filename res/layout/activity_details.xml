@@ -1,17 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/details_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:id="@+id/details_layout">
-    <TextView android:id="@+id/details_text_view"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/details_name_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/details_text_view_default"/>
+        android:text="@string/details_name_default" />
+
+    <TextView
+        android:id="@+id/details_description_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/details_description_default" />
+
     <Button
         android:id="@+id/details_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/details_button_text" />
+
 </LinearLayout>

@@ -26,7 +26,7 @@ public class DetailsActivity extends Activity {
 		Intent intent = getIntent();
 		
 		String name = intent.getStringExtra(HomeActivity.EXTRA_PLACE_NAME);
-		TextView textView = (TextView) findViewById(R.id.details_text_view);
+		TextView textView = (TextView) findViewById(R.id.details_name_text_view);
 		textView.setText(name);
 		
 		final Button button = (Button) findViewById(R.id.details_button);

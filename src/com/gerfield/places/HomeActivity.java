@@ -5,14 +5,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
-import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
-import org.apache.http.StatusLine;
-import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
@@ -34,6 +28,9 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
@@ -44,23 +41,61 @@ import android.widget.Toast;
 public class HomeActivity extends ListActivity {
 	public final static String EXTRA_PLACE_NAME = "com.example.myfirstapp.EXTRA_PLACE_NAME";
 	private Context context = this;
-	private ListView list;
 	private ArrayList<Place> places = new ArrayList<Place>();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
-		new MyTask().execute();
-		
+		StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
+				.permitAll().build();
+		StrictMode.setThreadPolicy(policy);
+		new PopulatePlacesTask().execute();
+
 	}
 
-	private class MyTask extends AsyncTask<Void, Void, Void> {
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		MenuInflater inflater = getMenuInflater();
+		inflater.inflate(R.menu.home, menu);
+		return true;
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+		// action with ID action_refresh was selected
+		case R.id.action_create_place:
+			Intent intent = new Intent(context, AddPlaceActivity.class);
+			startActivity(intent);
+			break;
+		// action with ID action_settings was selected
+		case R.id.action_settings:
+			Toast.makeText(this, "Settings selected", Toast.LENGTH_SHORT)
+					.show();
+			break;
+		default:
+			break;
+		}
+
+		return true;
+	}
+
+	@Override
+	protected void onListItemClick(ListView l, View v, int position, long id) {
+		// TODO Auto-generated method stub
+		super.onListItemClick(l, v, position, id);
+		Intent intent = new Intent(context, DetailsActivity.class);
+		String message = "TEST";
+		intent.putExtra(EXTRA_PLACE_NAME, message);
+		startActivity(intent);
+	}
+
+	private class PopulatePlacesTask extends AsyncTask<Void, Void, Void> {
 		private ProgressDialog progressDialog;
 
 		protected void onPreExecute() {
 			progressDialog = ProgressDialog.show(HomeActivity.this, "",
-					"Loading. Please wait...", true);
+					"Fetching data. Please wait...", true);
 		}
 
 		@Override
@@ -68,7 +103,8 @@ public class HomeActivity extends ListActivity {
 			try {
 
 				HttpClient hc = new DefaultHttpClient();
-				HttpGet get = new HttpGet("https://api.everlive.com/v1/BPHTkWwyt41jYxjq/Places");
+				HttpGet get = new HttpGet(
+						"https://api.everlive.com/v1/cZswy0ZulYmXBaML/Notes");
 
 				HttpResponse rp = hc.execute(get);
 
@@ -79,7 +115,7 @@ public class HomeActivity extends ListActivity {
 					for (int i = 0; i < sessions.length(); i++) {
 						JSONObject session = sessions.getJSONObject(i);
 						Place place = new Place();
-						place.setName(session.getString("name"));
+						place.setName(session.getString("title"));
 						places.add(place);
 					}
 				}
