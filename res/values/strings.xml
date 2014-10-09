@@ -14,5 +14,10 @@
     <string name="home_actionbar_label">Places</string>
     <string name="add_place_actionbar_label">Add new</string>
     <string name="details_actionbar_label">Details</string>
-
+	<string name="TV_add_account_username">Username</string>
+	<string name="TV_add_account_password">Password</string>
+	<string name="TV_add_account_api_key">API Key</string>
+	<string name="Btn_add_acount_cancel">Cancel</string>
+	<string name="Btn_add_acount_ok">OK</string>
+	<string name="account_type">com.garfield.places</string>
 </resources>
