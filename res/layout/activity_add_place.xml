@@ -8,18 +8,18 @@
         android:id="@+id/place_name_edit_text"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/place_name_hint" />
+        android:hint="@string/ET_add_place_name" />
 
     <EditText
         android:id="@+id/place_description_edit_text"
         android:layout_width="fill_parent"
         android:layout_height="50dp"
-        android:hint="@string/place_description_hint" />
+        android:hint="@string/ET_add_place_desription" />
 
     <Button
         android:id="@+id/save_place_button"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="@string/save_place_button_text" />
+        android:text="@string/Btn_save_place" />
 
 </LinearLayout>

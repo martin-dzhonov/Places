@@ -10,18 +10,18 @@
         android:id="@+id/details_name_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/details_name_default" />
+        android:text="@string/TV_details_name" />
 
     <TextView
         android:id="@+id/details_description_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/details_description_default" />
+        android:text="@string/TV_details_description" />
 
     <Button
         android:id="@+id/details_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/details_button_text" />
+        android:text="@string/Btn_details" />
 
 </LinearLayout>
