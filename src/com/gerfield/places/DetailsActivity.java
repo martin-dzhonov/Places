@@ -1,6 +1,5 @@
 package com.gerfield.places;
 
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -16,11 +15,10 @@ import android.widget.Toast;
 public class DetailsActivity extends Activity {
 
 	Context context = this;
-
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-
 		setContentView(R.layout.activity_details);
 		
 		Intent intent = getIntent();
@@ -32,7 +30,7 @@ public class DetailsActivity extends Activity {
 		final Button button = (Button) findViewById(R.id.details_button);
 		button.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
-				Toast.makeText(context, "asd", Toast.LENGTH_SHORT)
+				Toast.makeText(context, AccountGeneral.USER_ACCOUNT_TYPE, Toast.LENGTH_SHORT)
 						.show();
 				Intent intent = new Intent(context, HomeActivity.class);
 				startActivity(intent);
