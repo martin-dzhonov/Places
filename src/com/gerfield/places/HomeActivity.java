@@ -1,9 +1,5 @@
 package com.gerfield.places;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
@@ -12,14 +8,9 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.goebl.david.Webb;
-import com.google.gson.Gson;
-
 import android.R.string;
-import android.app.Activity;
 import android.app.ListActivity;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -32,9 +23,6 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -46,11 +34,7 @@ public class HomeActivity extends ListActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
-				.permitAll().build();
-		StrictMode.setThreadPolicy(policy);
 		new PopulatePlacesTask().execute();
-
 	}
 
 	@Override
@@ -65,13 +49,13 @@ public class HomeActivity extends ListActivity {
 		switch (item.getItemId()) {
 		// action with ID action_refresh was selected
 		case R.id.action_create_place:
-			Intent intent = new Intent(context, AddPlaceActivity.class);
-			startActivity(intent);
+			Intent addPlaceIntent = new Intent(context, AddPlaceActivity.class);
+			startActivity(addPlaceIntent);
 			break;
 		// action with ID action_settings was selected
-		case R.id.action_settings:
-			Toast.makeText(this, "Settings selected", Toast.LENGTH_SHORT)
-					.show();
+		case R.id.action_history:
+			Intent historyIntent = new Intent(context, HistoryActivity.class);
+			startActivity(historyIntent);
 			break;
 		default:
 			break;

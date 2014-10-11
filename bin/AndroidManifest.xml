@@ -28,6 +28,10 @@
         <activity
             android:name=".HomeActivity"
             android:label="@string/home_actionbar_label" >
+             <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".DetailsActivity"
@@ -44,16 +48,14 @@
         <activity
             android:name=".ChooseAccountTypeActivity"
             android:label="@string/add_place_actionbar_label" >
-            
         </activity>
-        <activity
-            android:name=".MainActivity"
-            android:label="@string/app_name" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+      <activity
+            android:name=".ReservationActivity"
+            android:label="@string/add_place_actionbar_label" >
+        </activity>
+      <activity
+            android:name=".HistoryActivity"
+            android:label="@string/add_place_actionbar_label" >
         </activity>
     </application>
 

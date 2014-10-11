@@ -7,18 +7,18 @@
     <TextView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-         android:text="Choose account type" />
+         android:text="@string/TV_choose_account_text" />
 
     <Button
         android:id="@+id/Btn_account_type_place"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="Place" />
+        android:text="@string/Btn_choose_account_place" />
 
     <Button
         android:id="@+id/Btn_account_type_customer"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="Customer"/>
+        android:text="@string/Btn_choose_account_customer"/>
 
 </LinearLayout>

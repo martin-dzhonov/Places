@@ -1,25 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical" >
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
 
-    <EditText
-        android:id="@+id/place_name_edit_text"
+    <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/ET_add_place_name" />
+        android:orientation="vertical" >
 
-    <EditText
-        android:id="@+id/place_description_edit_text"
-        android:layout_width="fill_parent"
-        android:layout_height="50dp"
-        android:hint="@string/ET_add_place_desription" />
+        <EditText
+            android:id="@+id/place_name_edit_text"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/ET_add_place_name" />
 
-    <Button
-        android:id="@+id/save_place_button"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/Btn_save_place" />
+        <EditText
+            android:id="@+id/place_description_edit_text"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/ET_add_place_desription" />
 
-</LinearLayout>
+        <TextView
+            android:id="@+id/TV_add_place_np"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/TV_add_place_np"
+            android:textSize="20sp" />
+
+        <NumberPicker
+            android:id="@+id/NP_add_place"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <Button
+            android:id="@+id/Btn_add_place_img"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/Btn_add_place_img" />
+
+        <Button
+            android:id="@+id/Btn_add_place_geo"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/Btn_add_place_geo" />
+
+        <Button
+            android:id="@+id/Btn_save_place"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/Btn_save_place" />
+    </LinearLayout>
+</ScrollView>

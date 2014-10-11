@@ -6,7 +6,7 @@
     
     <string name="TV_details_name">Default name</string>
     <string name="TV_details_description">Default description</string>
-    <string name="Btn_details">Make reservation</string>
+    <string name="Btn_make_reservation">Make reservation</string>
     
     <string name="ET_add_place_name">Name</string>
     <string name="ET_add_place_desription">Description</string>
@@ -24,4 +24,14 @@
 	
 	<string name="btn_revoke_access">Revoke Access</string>
 	<string name="btn_logout_from_google">Logout from Google</string>
+	
+	<string name="TV_choose_account_text">Choose account type</string>
+	<string name="Btn_choose_account_place">Place</string>
+	<string name="Btn_choose_account_customer">Customer</string>
+	
+	<string name="Btn_add_place_img">Add image</string>
+	<string name="Btn_add_place_geo">Add location</string>
+	
+	<string name="TV_add_place_np">Capacity:</string>
+	<string name="Btn_save_reservation">Go</string>
 </resources>

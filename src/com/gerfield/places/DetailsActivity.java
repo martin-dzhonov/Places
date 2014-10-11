@@ -27,12 +27,10 @@ public class DetailsActivity extends Activity {
 		TextView textView = (TextView) findViewById(R.id.details_name_text_view);
 		textView.setText(name);
 		
-		final Button button = (Button) findViewById(R.id.details_button);
+		final Button button = (Button) findViewById(R.id.Btn_make_reservation);
 		button.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
-				Toast.makeText(context, AccountGeneral.USER_ACCOUNT_TYPE, Toast.LENGTH_SHORT)
-						.show();
-				Intent intent = new Intent(context, HomeActivity.class);
+				Intent intent = new Intent(context, ReservationActivity.class);
 				startActivity(intent);
 			}
 		});

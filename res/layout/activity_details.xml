@@ -19,9 +19,9 @@
         android:text="@string/TV_details_description" />
 
     <Button
-        android:id="@+id/details_button"
+        android:id="@+id/Btn_make_reservation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/Btn_details" />
+        android:text="@string/Btn_make_reservation" />
 
 </LinearLayout>

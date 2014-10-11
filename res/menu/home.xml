@@ -3,10 +3,23 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.gerfield.places.HomeActivity" >
 
+    
+    <item
+        android:id="@+id/action_history"
+        android:icon="@drawable/ic_action_history"
+        android:orderInCategory="100"
+        android:showAsAction="always"
+        android:title="Refresh"/>
+    <item
+        android:id="@+id/action_favourites"
+        android:icon="@drawable/ic_action_favorite"
+        android:orderInCategory="100"
+        android:showAsAction="always"
+        android:title="Refresh"/>
     <item
         android:id="@+id/action_create_place"
-        android:icon="@drawable/image2"
-        android:orderInCategory="100"
+        android:icon="@drawable/ic_action_new"
+        android:orderInCategory="99"
         android:showAsAction="always"
         android:title="Refresh"/>
     <item
