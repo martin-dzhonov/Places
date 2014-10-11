@@ -339,11 +339,11 @@ int id action_bar_root 0x7f09002c
 int id action_bar_subtitle 0x7f090035
 int id action_bar_title 0x7f090034
 int id action_context_bar 0x7f09002f
-int id action_create_place 0x7f090061
+int id action_create_place 0x7f090063
 int id action_menu_divider 0x7f090028
 int id action_menu_presenter 0x7f090029
 int id action_mode_close_button 0x7f090036
-int id action_settings 0x7f090062
+int id action_settings 0x7f090064
 int id activity_chooser_view_content 0x7f090037
 int id always 0x7f09001e
 int id beginning 0x7f090023
@@ -369,6 +369,7 @@ int id edit_query 0x7f090042
 int id end 0x7f090025
 int id expand_activities_button 0x7f090038
 int id expanded_menu 0x7f09003e
+int id fragment_container 0x7f09005f
 int id grayscale 0x7f090012
 int id holo_dark 0x7f090005
 int id holo_light 0x7f090006
@@ -378,7 +379,7 @@ int id hybrid 0x7f090004
 int id icon 0x7f09003c
 int id ifRoom 0x7f09001d
 int id image 0x7f090039
-int id img 0x7f09005f
+int id img 0x7f090060
 int id imgProfilePic 0x7f090059
 int id list 0x7f090057
 int id listMode 0x7f090014
@@ -418,10 +419,11 @@ int id split_action_bar 0x7f090030
 int id strict_sandbox 0x7f090009
 int id submit_area 0x7f09004b
 int id tabMode 0x7f090015
+int id tabtextview 0x7f090062
 int id terrain 0x7f090003
 int id title 0x7f09003d
 int id top_action_bar 0x7f090032
-int id txt 0x7f090060
+int id txt 0x7f090061
 int id txtEmail 0x7f09005b
 int id txtName 0x7f09005a
 int id up 0x7f090033
@@ -459,8 +461,10 @@ int layout activity_choose_account_type 0x7f030019
 int layout activity_details 0x7f03001a
 int layout activity_home 0x7f03001b
 int layout activity_login 0x7f03001c
-int layout list_single_item 0x7f03001d
-int layout support_simple_spinner_dropdown_item 0x7f03001e
+int layout activity_tab 0x7f03001d
+int layout list_single_item 0x7f03001e
+int layout support_simple_spinner_dropdown_item 0x7f03001f
+int layout tab 0x7f030020
 int menu home 0x7f0d0000
 int string Btn_add_acount_cancel 0x7f07003c
 int string Btn_add_acount_ok 0x7f07003d
