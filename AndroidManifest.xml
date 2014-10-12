@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.gerfield.places"
+    package="com.garfield.places"
     android:versionCode="1"
     android:versionName="1.0" >
 
@@ -26,35 +26,40 @@
             android:value="@integer/google_play_services_version" />
 
         <activity
-            android:name=".HomeActivity"
+            android:name="com.garfield.places.HomeActivity"
             android:label="@string/home_actionbar_label" >
-             <intent-filter>
+             
+        </activity>
+        <activity
+            android:name="com.garfield.places.DetailsActivity"
+            android:label="@string/details_actionbar_label" >
+        </activity>
+        <activity
+            android:name="com.garfield.places.AddPlaceActivity"
+            android:label="@string/add_place_actionbar_label" >
+        </activity>
+        <activity
+            android:name="com.garfield.places.LoginActivity"
+            android:label="@string/app_name" >
+            <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
-            android:name=".DetailsActivity"
-            android:label="@string/details_actionbar_label" >
-        </activity>
-        <activity
-            android:name=".AddPlaceActivity"
-            android:label="@string/add_place_actionbar_label" >
-        </activity>
-        <activity
-            android:name=".LoginActivity"
-            android:label="@string/app_name" >
-        </activity>
-        <activity
-            android:name=".ChooseAccountTypeActivity"
+            android:name="com.garfield.places.ChooseAccountTypeActivity"
             android:label="@string/add_place_actionbar_label" >
         </activity>
       <activity
-            android:name=".ReservationActivity"
+            android:name="com.garfield.places.ReservationActivity"
             android:label="@string/add_place_actionbar_label" >
         </activity>
       <activity
-            android:name=".HistoryActivity"
+            android:name="com.garfield.places.HistoryActivity"
+            android:label="@string/add_place_actionbar_label" >
+        </activity>
+        <activity
+            android:name="com.garfield.places.AddImageActivity"
             android:label="@string/add_place_actionbar_label" >
         </activity>
     </application>

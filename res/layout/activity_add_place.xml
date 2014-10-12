@@ -32,6 +32,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
+        <ImageView
+            android:id="@+id/ImageView01"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+        </ImageView>
+
         <Button
             android:id="@+id/Btn_add_place_img"
             android:layout_width="fill_parent"
@@ -50,4 +56,5 @@
             android:layout_height="wrap_content"
             android:text="@string/Btn_save_place" />
     </LinearLayout>
+
 </ScrollView>
