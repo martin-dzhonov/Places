@@ -27,8 +27,10 @@ public class PlacesAdapter extends ArrayAdapter<Place> {
 	public View getView(int position, View convertView, ViewGroup parent) {
 		LayoutInflater inflater = context.getLayoutInflater();
 		View rowView = inflater.inflate(R.layout.list_single_item, null, true);
-		TextView txtTitle = (TextView) rowView.findViewById(R.id.txt);
-		txtTitle.setText(places.get(position).getName());
+		TextView nameTextView = (TextView) rowView.findViewById(R.id.TV_home_item_name);
+		nameTextView.setText(places.get(position).getName());
+		TextView idTextView = (TextView) rowView.findViewById(R.id.TV_home_item_id);
+		idTextView.setText(places.get(position).getId());
 		return rowView;
 	}
 }

@@ -4,6 +4,12 @@
     android:versionCode="1"
     android:versionName="1.0" >
 
+    <permission
+        android:name="info.androidhive.googlemapsv2.permission.MAPS_RECEIVE"
+        android:protectionLevel="signature" />
+
+    <uses-permission android:name="info.androidhive.googlemapsv2.permission.MAPS_RECEIVE" />
+
     <uses-sdk
         android:minSdkVersion="11"
         android:targetSdkVersion="19" />
@@ -14,6 +20,20 @@
     </uses-permission>
     <uses-permission android:name="android.permission.USE_CREDENTIALS" >
     </uses-permission>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <!-- Required OpenGL ES 2.0. for Maps V2 -->
+    <uses-feature
+        android:glEsVersion="0x00020000"
+        android:required="true" />
+
+    <!-- Requires OpenGL ES version 2 -->
+    <uses-feature
+        android:glEsVersion="0x00020000"
+        android:required="true" />
 
     <application
         android:allowBackup="true"
@@ -24,11 +44,26 @@
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
+        <meta-data
+            android:name="com.google.android.maps.v2.API_KEY"
+            android:value="AIzaSyAzdqH9f_JTwAf0WekmESmekLbhZnOa6Gw" />
 
+        <activity
+            android:name="com.garfield.places.LoginActivity"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.garfield.places.ChooseAccountTypeActivity"
+            android:label="@string/add_place_actionbar_label" >
+        </activity>
         <activity
             android:name="com.garfield.places.HomeActivity"
             android:label="@string/home_actionbar_label" >
-             
         </activity>
         <activity
             android:name="com.garfield.places.DetailsActivity"
@@ -39,27 +74,15 @@
             android:label="@string/add_place_actionbar_label" >
         </activity>
         <activity
-            android:name="com.garfield.places.LoginActivity"
-            android:label="@string/app_name" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity
-            android:name="com.garfield.places.ChooseAccountTypeActivity"
-            android:label="@string/add_place_actionbar_label" >
-        </activity>
-      <activity
             android:name="com.garfield.places.ReservationActivity"
             android:label="@string/add_place_actionbar_label" >
         </activity>
-      <activity
+        <activity
             android:name="com.garfield.places.HistoryActivity"
             android:label="@string/add_place_actionbar_label" >
         </activity>
         <activity
-            android:name="com.garfield.places.AddImageActivity"
+            android:name="com.garfield.places.MainActivity"
             android:label="@string/add_place_actionbar_label" >
         </activity>
     </application>

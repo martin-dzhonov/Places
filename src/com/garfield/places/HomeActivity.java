@@ -30,6 +30,7 @@ import android.widget.Toast;
 
 public class HomeActivity extends ListActivity {
 	public final static String EXTRA_PLACE_NAME = "com.example.myfirstapp.EXTRA_PLACE_NAME";
+	public final static String EXTRA_PLACE_ID = "com.example.myfirstapp.EXTRA_PLACE_ID";
 	private Context context = this;
 	private ArrayList<Place> places = new ArrayList<Place>();
 
@@ -38,7 +39,7 @@ public class HomeActivity extends ListActivity {
 		super.onCreate(savedInstanceState);
 		new PopulatePlacesTask().execute();
 	}
-
+	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		MenuInflater inflater = getMenuInflater();
@@ -70,9 +71,10 @@ public class HomeActivity extends ListActivity {
 	protected void onListItemClick(ListView l, View v, int position, long id) {
 		// TODO Auto-generated method stub
 		super.onListItemClick(l, v, position, id);
+		Toast.makeText(context, id +"", Toast.LENGTH_LONG).show();
 		Intent intent = new Intent(context, DetailsActivity.class);
-		String message = "TEST";
-		intent.putExtra(EXTRA_PLACE_NAME, message);
+		String message = places.get(position).getId();
+		intent.putExtra(EXTRA_PLACE_ID, message);
 		startActivity(intent);
 	}
 
@@ -80,6 +82,7 @@ public class HomeActivity extends ListActivity {
 		private ProgressDialog progressDialog;
 
 		protected void onPreExecute() {
+			places = new ArrayList<Place>();
 			progressDialog = ProgressDialog.show(HomeActivity.this, "",
 					"Fetching data. Please wait...", true);
 		}
@@ -90,7 +93,7 @@ public class HomeActivity extends ListActivity {
 
 				HttpClient hc = new DefaultHttpClient();
 				HttpGet get = new HttpGet(
-						"https://api.everlive.com/v1/cZswy0ZulYmXBaML/Notes");
+						"https://api.everlive.com/v1/BPHTkWwyt41jYxjq/Places");
 
 				HttpResponse rp = hc.execute(get);
 
@@ -100,8 +103,10 @@ public class HomeActivity extends ListActivity {
 					JSONArray sessions = root.getJSONArray("Result");
 					for (int i = 0; i < sessions.length(); i++) {
 						JSONObject session = sessions.getJSONObject(i);
-						Place place = new Place();
-						place.setName(session.getString("title"));
+						String id = session.getString("Id");
+						String name = session.getString("name");
+						Log.e("asd", id);
+						Place place = new Place(name, id);
 						places.add(place);
 					}
 				}

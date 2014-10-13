@@ -1,34 +1,66 @@
 package com.garfield.places;
 
+import java.io.ByteArrayOutputStream;
+
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.ResponseHandler;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.BasicResponseHandler;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.json.JSONObject;
+
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.location.Location;
+import android.location.LocationManager;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Base64;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.NumberPicker;
+import android.widget.Toast;
+
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapFragment;
+import com.google.android.gms.maps.model.CameraPosition;
+import com.google.android.gms.maps.model.LatLng;
 
 public class AddPlaceActivity extends Activity {
+	
+
 	Context context = this;
 	private static final int IMAGE_PICKER_SELECT = 999;
+	private GoogleMap googleMap;
+	private double currLatitute;
+	private double currLongitude;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_add_place);
 
-		NumberPicker np = (NumberPicker) findViewById(R.id.NP_add_place);
-		np.setMaxValue(1000);
-		np.setMinValue(1);
-		np.setValue(30);
+		currLatitute = 17.385044;
+		currLongitude = 78.486671;
+
+		initNumberPicker();
+		initMap();
+
 		final Button imgButton = (Button) findViewById(R.id.Btn_add_place_img);
 		imgButton.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
@@ -38,18 +70,17 @@ public class AddPlaceActivity extends Activity {
 				startActivityForResult(i, IMAGE_PICKER_SELECT);
 			}
 		});
+
 		final Button geoLocationButton = (Button) findViewById(R.id.Btn_add_place_geo);
 		geoLocationButton.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
-				Intent intent = new Intent(context, HomeActivity.class);
-				startActivity(intent);
 			}
 		});
+
 		final Button saveButton = (Button) findViewById(R.id.Btn_save_place);
 		saveButton.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
-				Intent intent = new Intent(context, HomeActivity.class);
-				startActivity(intent);
+				new PostToDb().execute();
 			}
 		});
 	}
@@ -69,11 +100,134 @@ public class AddPlaceActivity extends Activity {
 			cursor.close();
 
 			Bitmap yourSelectedImage = BitmapFactory.decodeFile(filePath);
-			
+
 			ImageView iView = (ImageView) findViewById(R.id.ImageView01);
 			iView.setImageBitmap(yourSelectedImage);
 
 		}
 	}
 
+	private static String encodeTobase64(Bitmap image) {
+		Bitmap immagex = image;
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		immagex.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+		byte[] b = baos.toByteArray();
+		String imageEncoded = Base64.encodeToString(b, Base64.DEFAULT);
+
+		return imageEncoded;
+	}
+
+	private void initNumberPicker() {
+		NumberPicker np = (NumberPicker) findViewById(R.id.NP_add_place);
+		np.setMaxValue(1000);
+		np.setMinValue(1);
+		np.setValue(30);
+	}
+
+	private void initMap() {
+		if (googleMap == null) {
+			googleMap = ((MapFragment) getFragmentManager().findFragmentById(
+					R.id.map)).getMap();
+			// check if map is created successfully or not
+			if (googleMap == null) {
+				Toast.makeText(getApplicationContext(),
+						"Sorry! unable to create maps", Toast.LENGTH_SHORT)
+						.show();
+			}
+		}
+		try {
+			googleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+			googleMap.setMyLocationEnabled(false);
+			googleMap.getUiSettings().setZoomControlsEnabled(true);
+			googleMap.getUiSettings().setCompassEnabled(true);
+			googleMap.getUiSettings().setZoomGesturesEnabled(true);
+			LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+			Location location = lm
+					.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+
+			CameraPosition cameraPosition = new CameraPosition.Builder()
+					.target(new LatLng(currLatitute, currLongitude)).zoom(15)
+					.build();
+
+			googleMap.animateCamera(CameraUpdateFactory
+					.newCameraPosition(cameraPosition));
+
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+	}
+
+	private class PostToDb extends AsyncTask<Void, Void, Void> {
+		private ProgressDialog progressDialog;
+		private EditText namEditText;
+		private EditText descEditText;
+		private ImageView imageView;
+		private NumberPicker nPicker;
+
+		protected void onPreExecute() {
+			namEditText = (EditText) findViewById(R.id.place_name_edit_text);
+			descEditText = (EditText) findViewById(R.id.place_description_edit_text);
+			imageView = (ImageView) findViewById(R.id.ImageView01);
+			nPicker = (NumberPicker) findViewById(R.id.NP_add_place);
+			progressDialog = ProgressDialog.show(AddPlaceActivity.this, "",
+					"Saving. Please wait...", true);
+		}
+
+		@Override
+		protected Void doInBackground(Void... arg0) {
+			try {
+
+				JSONObject obj = new JSONObject();
+				obj.put("name", namEditText.getText().toString());
+				obj.put("description", descEditText.getText().toString());
+
+				JSONObject location = new JSONObject();
+				location.put("longitude", currLongitude);
+				location.put("latitude", currLatitute);
+				obj.put("location", location);
+
+				BitmapDrawable drawable = (BitmapDrawable) imageView
+						.getDrawable();
+				Bitmap bitmap = drawable.getBitmap();
+				String imageData = encodeTobase64(bitmap);
+				obj.put("image", imageData);
+				
+				obj.put("capacity", String.valueOf( nPicker.getValue()));
+				
+				HttpClient httpclient = new DefaultHttpClient();
+
+				// url with the post data
+				HttpPost httpPost = new HttpPost(
+						"https://api.everlive.com/v1/BPHTkWwyt41jYxjq/Places");
+
+				// passes the results to a string builder/entity
+				StringEntity se = new StringEntity(obj.toString());
+
+				// sets the post request as the resulting string
+				httpPost.setEntity(se);
+				// sets a request header so the page receving the request
+				// will know what to do with it
+
+				// 7. Set some headers to inform server about the type of the
+				// content
+				httpPost.setHeader("Accept", "application/json");
+				httpPost.setHeader("Content-type", "application/json");
+
+				// 8. Execute POST request to the given URL
+				Log.e("ASDF", obj.toString());
+				HttpResponse httpResponse = httpclient.execute(httpPost);
+
+			} catch (Exception e) {
+				Log.e("HomeActivity", "Error loading JSON", e);
+			}
+			return null;
+
+		}
+
+		@Override
+		protected void onPostExecute(Void result) {
+			progressDialog.dismiss();
+			Toast.makeText(context, "Saved.", Toast.LENGTH_SHORT).show();
+		}
+	}
 }

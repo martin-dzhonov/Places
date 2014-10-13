@@ -79,12 +79,10 @@ public class LoginActivity extends Activity implements OnClickListener,
 		btnSignIn.setOnClickListener(this);
 		btnSignOut.setOnClickListener(this);
 		btnContinue.setOnClickListener(this);
-		Log.e("Loign", "calling");
 		mGoogleApiClient = new GoogleApiClient.Builder(this)
 				.addConnectionCallbacks(this)
 				.addOnConnectionFailedListener(this).addApi(Plus.API)
 				.addScope(Plus.SCOPE_PLUS_LOGIN).build();
-		Log.e("Loign", "calling");
 	}
 
 	protected void onStart() {
