@@ -43,39 +43,22 @@ import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-public class AddPlaceActivity extends Activity implements LocationListener {
+public class AddPlaceActivity extends Activity{
 
 	Context context = this;
 	private static final int IMAGE_PICKER_SELECT = 999;
 	private GoogleMap googleMap;
 	private double currLatitute;
 	private double currLongitude;
-	private LocationManager locationManager;
-	private String provider;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_add_place);
 
-		// TODO: Hardcoded FIX IT
-		currLatitute = 17.385044;
-		currLongitude = 78.486671;
-
-		locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-		// Define the criteria how to select the locatioin provider -> use
-		// default
-		Criteria criteria = new Criteria();
-		provider = locationManager.getBestProvider(criteria, false);
-		Location location = locationManager.getLastKnownLocation(provider);
-
-		// Initialize the location fields
-		if (location != null) {
-			Toast.makeText(context, "Provider " + provider + " has been selected.", Toast.LENGTH_SHORT).show();
-			onLocationChanged(location);
-		} else {
-			Toast.makeText(context, "Provider disabled, can't find location", Toast.LENGTH_SHORT).show();
-		}
+		// TODO: Sofia centre coordinates
+		currLatitute =  42.6975100;
+		currLongitude = 23.3241500;
 
 		initNumberPicker();
 		initMap();
@@ -98,18 +81,7 @@ public class AddPlaceActivity extends Activity implements LocationListener {
 		});
 	}
 
-	@Override
-	protected void onResume() {
-		super.onResume();
-		locationManager.requestLocationUpdates(provider, 400, 1, this);
-	}
 
-	/* Remove the locationlistener updates when Activity is paused */
-	@Override
-	protected void onPause() {
-		super.onPause();
-		locationManager.removeUpdates(this);
-	}
 
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if (requestCode == IMAGE_PICKER_SELECT
@@ -163,7 +135,7 @@ public class AddPlaceActivity extends Activity implements LocationListener {
 		}
 		try {
 			googleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
-			googleMap.setMyLocationEnabled(false);
+			googleMap.setMyLocationEnabled(true);
 			googleMap.getUiSettings().setZoomControlsEnabled(true);
 			googleMap.getUiSettings().setCompassEnabled(true);
 			googleMap.getUiSettings().setZoomGesturesEnabled(true);
@@ -185,6 +157,18 @@ public class AddPlaceActivity extends Activity implements LocationListener {
 
 			googleMap.animateCamera(CameraUpdateFactory
 					.newCameraPosition(cameraPosition));
+			googleMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
+
+	            @Override
+	            public void onMapClick(LatLng point) {
+	            	googleMap.clear();
+	                MarkerOptions marker = new MarkerOptions().position(
+	                        new LatLng(point.latitude, point.longitude)).title("New Marker");
+	        	    currLatitute = (int) (point.latitude);
+	        	    currLongitude = (int) (point.longitude);
+	                googleMap.addMarker(marker);
+	            }
+	        });
 
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -260,31 +244,4 @@ public class AddPlaceActivity extends Activity implements LocationListener {
 		}
 
 	}
-
-	  @Override
-	  public void onLocationChanged(Location location) {
-	    int lat = (int) (location.getLatitude());
-	    int lng = (int) (location.getLongitude());
-	    Log.e("ONLOCATIONCHANGED", String.valueOf(lat));
-	    Log.e("ONLOCATIONCHANGED", String.valueOf(lng));
-	  }
-
-	  @Override
-	  public void onStatusChanged(String provider, int status, Bundle extras) {
-	    // TODO Auto-generated method stub
-
-	  }
-
-	  @Override
-	  public void onProviderEnabled(String provider) {
-	    Toast.makeText(this, "Enabled new provider " + provider,
-	        Toast.LENGTH_SHORT).show();
-
-	  }
-
-	  @Override
-	  public void onProviderDisabled(String provider) {
-	    Toast.makeText(this, "Disabled provider " + provider,
-	        Toast.LENGTH_SHORT).show();
-	  }
 }
