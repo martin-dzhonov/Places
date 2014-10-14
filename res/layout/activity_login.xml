@@ -3,14 +3,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="16dp"
     tools:context=".LoginActivity" >
 
     <LinearLayout
         android:id="@+id/llProfile"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
         android:orientation="horizontal"
         android:visibility="gone"
         android:weightSum="3" >

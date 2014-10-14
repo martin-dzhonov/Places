@@ -4,10 +4,8 @@ import java.io.ByteArrayOutputStream;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
-import org.apache.http.client.ResponseHandler;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
-import org.apache.http.impl.client.BasicResponseHandler;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONObject;
 
@@ -57,6 +55,7 @@ public class AddPlaceActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_add_place);
 
+		//TODO: Hardcoded FIX IT
 		currLatitute = 17.385044;
 		currLongitude = 78.486671;
 
@@ -76,7 +75,7 @@ public class AddPlaceActivity extends Activity {
 		final Button saveButton = (Button) findViewById(R.id.Btn_save_place);
 		saveButton.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
-				new PostToDb().execute();
+				new EverlivePost().execute();
 			}
 		});
 	}
@@ -137,9 +136,8 @@ public class AddPlaceActivity extends Activity {
 			googleMap.getUiSettings().setZoomControlsEnabled(true);
 			googleMap.getUiSettings().setCompassEnabled(true);
 			googleMap.getUiSettings().setZoomGesturesEnabled(true);
-			LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-			Location location = lm
-					.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+			//LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+			//Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
 			
 			MarkerOptions marker = new MarkerOptions().position(
 					new LatLng(currLatitute, currLongitude))
@@ -160,7 +158,7 @@ public class AddPlaceActivity extends Activity {
 		}
 	}
 
-	private class PostToDb extends AsyncTask<Void, Void, Void> {
+	private class EverlivePost extends AsyncTask<Void, Void, Void> {
 		private ProgressDialog progressDialog;
 		private EditText namEditText;
 		private EditText descEditText;
@@ -199,7 +197,6 @@ public class AddPlaceActivity extends Activity {
 				
 				HttpClient httpclient = new DefaultHttpClient();
 
-				// url with the post data
 				HttpPost httpPost = new HttpPost(
 						"https://api.everlive.com/v1/BPHTkWwyt41jYxjq/Places");
 
@@ -208,11 +205,7 @@ public class AddPlaceActivity extends Activity {
 
 				// sets the post request as the resulting string
 				httpPost.setEntity(se);
-				// sets a request header so the page receving the request
-				// will know what to do with it
 
-				// 7. Set some headers to inform server about the type of the
-				// content
 				httpPost.setHeader("Accept", "application/json");
 				httpPost.setHeader("Content-type", "application/json");
 

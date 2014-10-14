@@ -1,14 +1,11 @@
 package com.garfield.places;
 
-import java.util.ArrayList;
-
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -21,7 +18,6 @@ import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-import android.R.string;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -31,8 +27,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Base64;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -69,7 +63,6 @@ public class DetailsActivity extends Activity {
 		private TextView descriptionTextView;
 		private TextView capacityTextView;
 		private ImageView imageView;
-		private String name;
 		private GoogleMap googleMap;
 
 		protected void onPreExecute() {

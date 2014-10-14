@@ -12,21 +12,18 @@ import org.json.JSONObject;
 
 import com.garfield.places.R;
 
-import android.R.string;
 import android.app.ListActivity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.StrictMode;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
-import android.widget.Toast;
 
 public class HomeActivity extends ListActivity {
 	public final static String EXTRA_PLACE_NAME = "com.example.myfirstapp.EXTRA_PLACE_NAME";
@@ -116,7 +113,6 @@ public class HomeActivity extends ListActivity {
 				Log.e("HomeActivity", "Error loading JSON", e);
 			}
 			return null;
-
 		}
 
 		@Override

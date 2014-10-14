@@ -1,21 +1,14 @@
 package com.garfield.places;
 
-import java.io.InputStream;
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentSender.SendIntentException;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -27,10 +20,6 @@ import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.GoogleApiClient.ConnectionCallbacks;
 import com.google.android.gms.common.api.GoogleApiClient.OnConnectionFailedListener;
-import com.google.android.gms.common.api.ResultCallback;
-import com.google.android.gms.common.api.Status;
-import com.google.android.gms.common.internal.l;
-import com.google.android.gms.internal.br;
 import com.google.android.gms.plus.Plus;
 import com.google.android.gms.plus.model.people.Person;
 
@@ -42,9 +31,8 @@ public class LoginActivity extends Activity implements OnClickListener,
 	private static final String TAG = "LoginActivity";
 
 	// Profile pic image size in pixels
-	private static final int PROFILE_PIC_SIZE = 400;
+	// private static final int PROFILE_PIC_SIZE = 400;
 
-	// Google client to interact with Google API
 	private GoogleApiClient mGoogleApiClient;
 
 	/**
@@ -59,7 +47,6 @@ public class LoginActivity extends Activity implements OnClickListener,
 
 	private SignInButton btnSignIn;
 	private Button btnSignOut, btnContinue;
-	private ImageView imgProfilePic;
 	private TextView txtName, txtEmail;
 	private LinearLayout llProfileLayout;
 
@@ -224,8 +211,9 @@ public class LoginActivity extends Activity implements OnClickListener,
 		case R.id.btn_sign_in:
 			// Signin button clicked
 			signInWithGplus();
-			//Intent intent = new Intent(context, ChooseAccountTypeActivity.class);
-			//startActivity(intent);
+			// Intent intent = new Intent(context,
+			// ChooseAccountTypeActivity.class);
+			// startActivity(intent);
 			break;
 		case R.id.btn_sign_out:
 			// Signout button clicked
@@ -259,5 +247,4 @@ public class LoginActivity extends Activity implements OnClickListener,
 			updateUI(false);
 		}
 	}
-
 }

@@ -44,13 +44,13 @@ public class ReservationActivity extends Activity {
 		final Button placeButton = (Button) findViewById(R.id.Btn_save_reservation);
 		placeButton.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
-				new PostToDb().execute(placeId);
+				new EverlivePut().execute(placeId);
 				Intent intent = new Intent(context, HistoryActivity.class);
 				startActivity(intent);
 			}
 		});
 	}
-	private class PostToDb extends AsyncTask<String, Void, Void> {
+	private class EverlivePut extends AsyncTask<String, Void, Void> {
 		private ProgressDialog progressDialog;
 		private EditText namEditText;
 		private TimePicker timePicker;
@@ -67,7 +67,7 @@ public class ReservationActivity extends Activity {
 		@Override
 		protected Void doInBackground(String... placeId) {
 			try {
-
+				
 				JSONObject obj = new JSONObject();
 				//obj.put("Name", namEditText.getText().toString());
 				//obj.put("People", numberPicker.getValue());

@@ -9,13 +9,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.Toast;
 
 public class ChooseAccountTypeActivity extends Activity {
 	Context context = this;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_choose_account_type);
 		
