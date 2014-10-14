@@ -164,8 +164,8 @@ public class AddPlaceActivity extends Activity{
 	            	googleMap.clear();
 	                MarkerOptions marker = new MarkerOptions().position(
 	                        new LatLng(point.latitude, point.longitude)).title("New Marker");
-	        	    currLatitute = (int) (point.latitude);
-	        	    currLongitude = (int) (point.longitude);
+	        	    currLatitute = (double) (point.latitude);
+	        	    currLongitude = (double) (point.longitude);
 	                googleMap.addMarker(marker);
 	            }
 	        });
@@ -191,10 +191,11 @@ public class AddPlaceActivity extends Activity{
 					"Saving. Please wait...", true);
 		}
 
+		
 		@Override
 		protected Void doInBackground(Void... arg0) {
 			try {
-
+				//TODO: make all input requred
 				JSONObject obj = new JSONObject();
 				obj.put("name", namEditText.getText().toString());
 				obj.put("description", descEditText.getText().toString());
