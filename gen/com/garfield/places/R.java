@@ -1462,10 +1462,9 @@ containing a value of this type.
         public static final int ic_plusone_standard_off_client=0x7f020077;
         public static final int ic_plusone_tall_off_client=0x7f020078;
         public static final int image2=0x7f020079;
-        public static final int places_logo=0x7f02007a;
-        public static final int places_logo3=0x7f02007b;
-        public static final int powered_by_google_dark=0x7f02007c;
-        public static final int powered_by_google_light=0x7f02007d;
+        public static final int places_logo3=0x7f02007a;
+        public static final int powered_by_google_dark=0x7f02007b;
+        public static final int powered_by_google_light=0x7f02007c;
     }
     public static final class id {
         public static final int Btn_account_type_customer=0x7f080057;
@@ -1479,6 +1478,7 @@ containing a value of this type.
         public static final int ET_reservation_name=0x7f080068;
         public static final int IV_add_image=0x7f080052;
         public static final int IV_details_image=0x7f08005c;
+        public static final int IV_home_item=0x7f08006c;
         public static final int LV_history=0x7f08005f;
         public static final int LV_home=0x7f080060;
         public static final int MAP_add_place=0x7f080053;
@@ -1490,8 +1490,8 @@ containing a value of this type.
         public static final int TV_details_capacity=0x7f08005b;
         public static final int TV_details_description=0x7f08005a;
         public static final int TV_details_name=0x7f080059;
-        public static final int TV_home_item_id=0x7f08006d;
-        public static final int TV_home_item_name=0x7f08006c;
+        public static final int TV_home_item_id=0x7f08006e;
+        public static final int TV_home_item_name=0x7f08006d;
         public static final int action_bar=0x7f08002e;
         public static final int action_bar_activity_content=0x7f080027;
         public static final int action_bar_container=0x7f08002d;
@@ -1500,13 +1500,13 @@ containing a value of this type.
         public static final int action_bar_subtitle=0x7f080035;
         public static final int action_bar_title=0x7f080034;
         public static final int action_context_bar=0x7f08002f;
-        public static final int action_create_place=0x7f080070;
-        public static final int action_history=0x7f08006e;
+        public static final int action_create_place=0x7f080071;
+        public static final int action_history=0x7f08006f;
         public static final int action_menu_divider=0x7f080028;
         public static final int action_menu_presenter=0x7f080029;
         public static final int action_mode_close_button=0x7f080036;
-        public static final int action_refresh=0x7f08006f;
-        public static final int action_settings=0x7f080071;
+        public static final int action_refresh=0x7f080070;
+        public static final int action_settings=0x7f080072;
         public static final int activity_chooser_view_content=0x7f080037;
         public static final int always=0x7f08001e;
         public static final int beginning=0x7f080023;

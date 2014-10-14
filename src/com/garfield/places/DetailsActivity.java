@@ -134,7 +134,7 @@ public class DetailsActivity extends Activity  {
 						.defaultMarker(BitmapDescriptorFactory.HUE_RED));
 				googleMap.addMarker(marker);
 				CameraPosition cameraPosition = new CameraPosition.Builder()
-						.target(new LatLng(latitude, longitude)).zoom(15)
+						.target(new LatLng(latitude, longitude)).zoom(14)
 						.build();
 
 				googleMap.animateCamera(CameraUpdateFactory

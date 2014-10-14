@@ -9,6 +9,7 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONObject;
 
+import android.R.string;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -43,7 +44,7 @@ import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-public class AddPlaceActivity extends Activity{
+public class AddPlaceActivity extends Activity {
 
 	Context context = this;
 	private static final int IMAGE_PICKER_SELECT = 999;
@@ -56,8 +57,8 @@ public class AddPlaceActivity extends Activity{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_add_place);
 
-		// TODO: Sofia centre coordinates
-		currLatitute =  42.6975100;
+		// Sofia city centre coordinates
+		currLatitute = 42.6975100;
 		currLongitude = 23.3241500;
 
 		initNumberPicker();
@@ -80,8 +81,6 @@ public class AddPlaceActivity extends Activity{
 			}
 		});
 	}
-
-
 
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if (requestCode == IMAGE_PICKER_SELECT
@@ -152,30 +151,31 @@ public class AddPlaceActivity extends Activity{
 			googleMap.addMarker(marker);
 
 			CameraPosition cameraPosition = new CameraPosition.Builder()
-					.target(new LatLng(currLatitute, currLongitude)).zoom(15)
+					.target(new LatLng(currLatitute, currLongitude)).zoom(14)
 					.build();
 
 			googleMap.animateCamera(CameraUpdateFactory
 					.newCameraPosition(cameraPosition));
 			googleMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
 
-	            @Override
-	            public void onMapClick(LatLng point) {
-	            	googleMap.clear();
-	                MarkerOptions marker = new MarkerOptions().position(
-	                        new LatLng(point.latitude, point.longitude)).title("New Marker");
-	        	    currLatitute = (double) (point.latitude);
-	        	    currLongitude = (double) (point.longitude);
-	                googleMap.addMarker(marker);
-	            }
-	        });
+				@Override
+				public void onMapClick(LatLng point) {
+					googleMap.clear();
+					MarkerOptions marker = new MarkerOptions().position(
+							new LatLng(point.latitude, point.longitude)).title(
+							"New Marker");
+					currLatitute = (double) (point.latitude);
+					currLongitude = (double) (point.longitude);
+					googleMap.addMarker(marker);
+				}
+			});
 
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
 	}
 
-	private class EverlivePost extends AsyncTask<Void, Void, Void> {
+	private class EverlivePost extends AsyncTask<Void, Void, Boolean> {
 		private ProgressDialog progressDialog;
 		private EditText namEditText;
 		private EditText descEditText;
@@ -191,13 +191,19 @@ public class AddPlaceActivity extends Activity{
 					"Saving. Please wait...", true);
 		}
 
-		
 		@Override
-		protected Void doInBackground(Void... arg0) {
+		protected Boolean doInBackground(Void... arg0) {
 			try {
-				//TODO: make all input requred
+				String name = namEditText.getText().toString();
+				String desc = descEditText.getText().toString();
+				if (name.equals("") || desc.equals("")) {
+					return false;
+				}
+				if (imageView.getDrawable() == null) {
+					return false;
+				}
 				JSONObject obj = new JSONObject();
-				obj.put("name", namEditText.getText().toString());
+				obj.put("name", name);
 				obj.put("description", descEditText.getText().toString());
 
 				JSONObject location = new JSONObject();
@@ -229,18 +235,38 @@ public class AddPlaceActivity extends Activity{
 
 				// 8. Execute POST request to the given URL
 				HttpResponse httpResponse = httpclient.execute(httpPost);
+				// TODO: make all input requred
 
 			} catch (Exception e) {
 				Log.e("HomeActivity", "Error loading JSON", e);
+				return false;
 			}
-			return null;
+			return true;
 
 		}
 
 		@Override
-		protected void onPostExecute(Void result) {
+		protected void onPostExecute(Boolean result) {
 			progressDialog.dismiss();
-			Toast.makeText(context, "Saved.", Toast.LENGTH_SHORT).show();
+			if (result == true) {
+				Toast.makeText(context, "Saved.", Toast.LENGTH_SHORT).show();
+				Intent intent = new Intent(context, HomeActivity.class);
+				startActivity(intent);
+			} else {
+				if (namEditText.getText().toString().equals("")
+						|| descEditText.getText().toString().equals("")) {
+					Toast.makeText(context, "All text field are required.",
+							Toast.LENGTH_SHORT).show();
+				} else if (imageView.getDrawable() == null) {
+					Toast.makeText(context, "Image is required.",
+							Toast.LENGTH_SHORT).show();
+				} else {
+					Toast.makeText(context, "Error saving to database.",
+							Toast.LENGTH_SHORT).show();
+				}
+
+			}
+			
 		}
 
 	}

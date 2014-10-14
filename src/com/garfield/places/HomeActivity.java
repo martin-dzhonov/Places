@@ -100,12 +100,13 @@ public class HomeActivity extends ListActivity {
 				if (rp.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
 					String result = EntityUtils.toString(rp.getEntity());
 					JSONObject root = new JSONObject(result);
-					JSONArray sessions = root.getJSONArray("Result");
-					for (int i = 0; i < sessions.length(); i++) {
-						JSONObject session = sessions.getJSONObject(i);
-						String id = session.getString("Id");
-						String name = session.getString("name");
-						Place place = new Place(name, id);
+					JSONArray placesJsonArray = root.getJSONArray("Result");
+					for (int i = 0; i < placesJsonArray.length(); i++) {
+						JSONObject placeJson = placesJsonArray.getJSONObject(i);
+						String id = placeJson.getString("Id");
+						String name = placeJson.getString("name");
+						String imageData = placeJson.getString("image");
+						Place place = new Place(name, id, imageData);
 						places.add(place);
 					}
 				}

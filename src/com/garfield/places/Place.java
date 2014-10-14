@@ -4,17 +4,13 @@ public class Place {
 	private String name;
 	private String content;
 	private String id;
-	public Place() {
-		this(null);
-	}
+	private String imageData;
 
-	public Place(String name) {
-		this.name = name;
-	}
 	
-	public Place(String name, String id) {
+	public Place(String name, String id, String imageData){
 		this.name = name;
 		this.id = id;
+		this.imageData = imageData;
 	}
 
 	public String getContent() {
@@ -36,5 +32,8 @@ public class Place {
 	public String getId() {
 		return id;
 	}
-
+	
+	public String getImageBase64() {
+		return imageData;
+	}
 }

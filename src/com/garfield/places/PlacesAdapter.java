@@ -7,10 +7,13 @@ import com.garfield.places.R;
 import android.R.integer;
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.BitmapFactory;
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 public class PlacesAdapter extends ArrayAdapter<Place> {
@@ -27,9 +30,17 @@ public class PlacesAdapter extends ArrayAdapter<Place> {
 	public View getView(int position, View convertView, ViewGroup parent) {
 		LayoutInflater inflater = context.getLayoutInflater();
 		View rowView = inflater.inflate(R.layout.list_single_item, null, true);
-		TextView nameTextView = (TextView) rowView.findViewById(R.id.TV_home_item_name);
+		TextView nameTextView = (TextView) rowView
+				.findViewById(R.id.TV_home_item_name);
 		nameTextView.setText(places.get(position).getName());
-		TextView idTextView = (TextView) rowView.findViewById(R.id.TV_home_item_id);
+		ImageView imageView = (ImageView) rowView
+				.findViewById(R.id.IV_home_item);
+		byte[] imageAsBytes = Base64.decode(places.get(position)
+				.getImageBase64().getBytes(), Base64.DEFAULT);
+		imageView.setImageBitmap(BitmapFactory.decodeByteArray(imageAsBytes, 0,
+				imageAsBytes.length));
+		TextView idTextView = (TextView) rowView
+				.findViewById(R.id.TV_home_item_id);
 		idTextView.setText(places.get(position).getId());
 		return rowView;
 	}
