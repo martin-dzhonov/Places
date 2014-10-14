@@ -17,7 +17,9 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
+import android.location.Criteria;
 import android.location.Location;
+import android.location.LocationListener;
 import android.location.LocationManager;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -41,23 +43,39 @@ import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-public class AddPlaceActivity extends Activity {
-	
+public class AddPlaceActivity extends Activity implements LocationListener {
 
 	Context context = this;
 	private static final int IMAGE_PICKER_SELECT = 999;
 	private GoogleMap googleMap;
 	private double currLatitute;
 	private double currLongitude;
+	private LocationManager locationManager;
+	private String provider;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_add_place);
 
-		//TODO: Hardcoded FIX IT
+		// TODO: Hardcoded FIX IT
 		currLatitute = 17.385044;
 		currLongitude = 78.486671;
+
+		locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+		// Define the criteria how to select the locatioin provider -> use
+		// default
+		Criteria criteria = new Criteria();
+		provider = locationManager.getBestProvider(criteria, false);
+		Location location = locationManager.getLastKnownLocation(provider);
+
+		// Initialize the location fields
+		if (location != null) {
+			Toast.makeText(context, "Provider " + provider + " has been selected.", Toast.LENGTH_SHORT).show();
+			onLocationChanged(location);
+		} else {
+			Toast.makeText(context, "Provider disabled, can't find location", Toast.LENGTH_SHORT).show();
+		}
 
 		initNumberPicker();
 		initMap();
@@ -78,6 +96,19 @@ public class AddPlaceActivity extends Activity {
 				new EverlivePost().execute();
 			}
 		});
+	}
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+		locationManager.requestLocationUpdates(provider, 400, 1, this);
+	}
+
+	/* Remove the locationlistener updates when Activity is paused */
+	@Override
+	protected void onPause() {
+		super.onPause();
+		locationManager.removeUpdates(this);
 	}
 
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -136,12 +167,14 @@ public class AddPlaceActivity extends Activity {
 			googleMap.getUiSettings().setZoomControlsEnabled(true);
 			googleMap.getUiSettings().setCompassEnabled(true);
 			googleMap.getUiSettings().setZoomGesturesEnabled(true);
-			//LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-			//Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-			
+			// LocationManager lm = (LocationManager)
+			// getSystemService(Context.LOCATION_SERVICE);
+			// Location location =
+			// lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+
 			MarkerOptions marker = new MarkerOptions().position(
-					new LatLng(currLatitute, currLongitude))
-					.title("Your location here");
+					new LatLng(currLatitute, currLongitude)).title(
+					"Your location here");
 			marker.icon(BitmapDescriptorFactory
 					.defaultMarker(BitmapDescriptorFactory.HUE_RED));
 			googleMap.addMarker(marker);
@@ -192,9 +225,9 @@ public class AddPlaceActivity extends Activity {
 				Bitmap bitmap = drawable.getBitmap();
 				String imageData = encodeTobase64(bitmap);
 				obj.put("image", imageData);
-				
-				obj.put("capacity", String.valueOf( nPicker.getValue()));
-				
+
+				obj.put("capacity", String.valueOf(nPicker.getValue()));
+
 				HttpClient httpclient = new DefaultHttpClient();
 
 				HttpPost httpPost = new HttpPost(
@@ -225,5 +258,33 @@ public class AddPlaceActivity extends Activity {
 			progressDialog.dismiss();
 			Toast.makeText(context, "Saved.", Toast.LENGTH_SHORT).show();
 		}
+
 	}
+
+	  @Override
+	  public void onLocationChanged(Location location) {
+	    int lat = (int) (location.getLatitude());
+	    int lng = (int) (location.getLongitude());
+	    Log.e("ONLOCATIONCHANGED", String.valueOf(lat));
+	    Log.e("ONLOCATIONCHANGED", String.valueOf(lng));
+	  }
+
+	  @Override
+	  public void onStatusChanged(String provider, int status, Bundle extras) {
+	    // TODO Auto-generated method stub
+
+	  }
+
+	  @Override
+	  public void onProviderEnabled(String provider) {
+	    Toast.makeText(this, "Enabled new provider " + provider,
+	        Toast.LENGTH_SHORT).show();
+
+	  }
+
+	  @Override
+	  public void onProviderDisabled(String provider) {
+	    Toast.makeText(this, "Disabled provider " + provider,
+	        Toast.LENGTH_SHORT).show();
+	  }
 }
