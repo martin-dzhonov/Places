@@ -1,12 +1,8 @@
-Places
-======
-
-Android Native App for restaurant reservations
-
+Requirements
 •	(Up to 15 points) Use custom views and adapters. It can be one of the following
 o	Custom grids
 o	Custom ListView
-o	<p style='color:red'>Animation views</p>
+o	Animation views
 •	(Up to 9 points) Use two of the following device APIs
 o	Accelerometer 
 o	Camera
@@ -48,3 +44,4 @@ o	The modules must follow the best practices for developing applications
 •	(Up to 6 points) Validation and Error handling 
 o	Validation of user input
 o	Handling access denials, network issues, etc. and keeping app alive
+The maximum score for the teamwork assignment is 100 points. 
