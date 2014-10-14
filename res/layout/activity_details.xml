@@ -1,45 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/details_layout"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical" >
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
 
-    <TextView
-        android:id="@+id/TV_details_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/TV_details_name" />
-
-    <TextView
-        android:id="@+id/TV_details_description"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/TV_details_description" />
-
-    <TextView
-        android:id="@+id/TV_details_capacity"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="0" />
-
-    <ImageView
-        android:id="@+id/IV_details_image"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" >
-    </ImageView>
-
-    <fragment
-        android:id="@+id/MAP_details"
-        android:name="com.google.android.gms.maps.MapFragment"
+    <LinearLayout
+        android:id="@+id/details_layout"
         android:layout_width="match_parent"
-        android:layout_height="300dp" />
-
-    <Button
-        android:id="@+id/Btn_make_reservation"
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/Btn_make_reservation" />
+        android:orientation="vertical" >
 
-</LinearLayout>
+        <TextView
+            android:id="@+id/TV_details_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/TV_details_name" />
+
+        <TextView
+            android:id="@+id/TV_details_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/TV_details_description" />
+
+        <TextView
+            android:id="@+id/TV_details_capacity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0" />
+
+        <ImageView
+            android:id="@+id/IV_details_image"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" >
+        </ImageView>
+
+        <fragment
+            android:id="@+id/MAP_details"
+            android:name="com.google.android.gms.maps.MapFragment"
+            android:layout_width="match_parent"
+            android:layout_height="300dp" />
+
+        <Button
+            android:id="@+id/Btn_make_reservation"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/Btn_make_reservation" />
+    </LinearLayout>
+
+</ScrollView>

@@ -60,6 +60,9 @@ public class HomeActivity extends ListActivity {
 			Intent historyIntent = new Intent(context, HistoryActivity.class);
 			startActivity(historyIntent);
 			break;
+		case R.id.action_refresh:
+			new PopulatePlacesTask().execute();
+			break;
 		default:
 			break;
 		}
@@ -71,7 +74,6 @@ public class HomeActivity extends ListActivity {
 	protected void onListItemClick(ListView l, View v, int position, long id) {
 		// TODO Auto-generated method stub
 		super.onListItemClick(l, v, position, id);
-		Toast.makeText(context, id +"", Toast.LENGTH_LONG).show();
 		Intent intent = new Intent(context, DetailsActivity.class);
 		String message = places.get(position).getId();
 		intent.putExtra(EXTRA_PLACE_ID, message);

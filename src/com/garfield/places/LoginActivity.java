@@ -153,7 +153,7 @@ public class LoginActivity extends Activity implements OnClickListener,
 	@Override
 	public void onConnected(Bundle arg0) {
 		mSignInClicked = false;
-		Toast.makeText(this, "User is connected!", Toast.LENGTH_LONG).show();
+		Toast.makeText(this, "User connected.", Toast.LENGTH_LONG).show();
 
 		// Get user's information
 		getProfileInformation();
@@ -213,13 +213,6 @@ public class LoginActivity extends Activity implements OnClickListener,
 	public void onConnectionSuspended(int arg0) {
 		mGoogleApiClient.connect();
 		updateUI(false);
-	}
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.home, menu);
-		return true;
 	}
 
 	/**

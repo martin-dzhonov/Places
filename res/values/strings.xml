@@ -3,35 +3,28 @@
 
     <string name="app_name">Places</string>
     <string name="action_settings">Settings</string>
-    
-    <string name="TV_details_name">Default name</string>
-    <string name="TV_details_description">Default description</string>
+    <string name="TV_details_name">Name</string>
+    <string name="TV_details_description">Description</string>
     <string name="Btn_make_reservation">Make reservation</string>
-    
     <string name="ET_add_place_name">Name</string>
     <string name="ET_add_place_desription">Description</string>
     <string name="Btn_save_place">Save</string>
-    
-    <string name="home_actionbar_label">Places</string>
     <string name="add_place_actionbar_label">Add new</string>
-     <string name="details_activity_label">Details</string>
+    <string name="details_activity_label">Details</string>
     <string name="details_actionbar_label">Details</string>
-    
-	<string name="Btn_add_acount_cancel">Cancel</string>
-	<string name="Btn_add_acount_ok">OK</string>
-	
-	<string name="account_type">com.garfield.places</string>
-	
-	<string name="btn_revoke_access">Revoke Access</string>
-	<string name="btn_logout_from_google">Logout from Google</string>
-	
-	<string name="TV_choose_account_text">Choose account type</string>
-	<string name="Btn_choose_account_place">Place</string>
-	<string name="Btn_choose_account_customer">Customer</string>
-	
-	<string name="Btn_add_place_img">Add image</string>
-	<string name="Btn_add_place_geo">Add location</string>
-	
-	<string name="TV_add_place_np">Capacity:</string>
-	<string name="Btn_save_reservation">Go</string>
+    <string name="Btn_add_acount_cancel">Cancel</string>
+    <string name="Btn_add_acount_ok">OK</string>
+    <string name="account_type">com.garfield.places</string>
+    <string name="btn_revoke_access">Revoke Access</string>
+    <string name="btn_logout_from_google">Logout from Google</string>
+    <string name="TV_choose_account_text">Choose account type</string>
+    <string name="Btn_choose_account_place">Place</string>
+    <string name="Btn_choose_account_customer">Customer</string>
+    <string name="Btn_add_place_img">Add image</string>
+    <string name="Btn_add_place_geo">Add location</string>
+    <string name="TV_add_place_np">Capacity:</string>
+    <string name="Btn_save_reservation">Go</string>
+    <string name="history_label">History</string>
+    <string name="reservation_label">Reservation</string>
+
 </resources>

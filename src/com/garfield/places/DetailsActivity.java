@@ -13,14 +13,23 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.garfield.places.R;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.CameraPosition;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 
 import android.R.string;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Base64;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -34,22 +43,22 @@ import android.widget.Toast;
 public class DetailsActivity extends Activity {
 
 	Context context = this;
-
+	public final static String PLACE_ID = "com.example.myfirstapp.PLACE_ID";
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_details);
 
 		Intent intent = getIntent();
-
-		new LoadPlaceDetails().execute(intent
-				.getStringExtra(HomeActivity.EXTRA_PLACE_ID));
+		final String placeId = intent.getStringExtra(HomeActivity.EXTRA_PLACE_ID);
+		new LoadPlaceDetails().execute(placeId);
 
 		final Button button = (Button) findViewById(R.id.Btn_make_reservation);
 		button.setOnClickListener(new OnClickListener() {
-			public void onClick(View v) {
-				Intent intent = new Intent(context, ReservationActivity.class);
-				startActivity(intent);
+			public void onClick(View v) {			
+				Intent reserveIntent = new Intent(context, ReservationActivity.class);
+				reserveIntent.putExtra(PLACE_ID, placeId);
+				startActivity(reserveIntent);
 			}
 		});
 	}
@@ -61,6 +70,7 @@ public class DetailsActivity extends Activity {
 		private TextView capacityTextView;
 		private ImageView imageView;
 		private String name;
+		private GoogleMap googleMap;
 
 		protected void onPreExecute() {
 			progressDialog = ProgressDialog.show(DetailsActivity.this, "",
@@ -69,6 +79,17 @@ public class DetailsActivity extends Activity {
 			descriptionTextView = (TextView) findViewById(R.id.TV_details_description);
 			capacityTextView = (TextView) findViewById(R.id.TV_details_capacity);
 			imageView = (ImageView) findViewById(R.id.IV_details_image);
+
+			if (googleMap == null) {
+				googleMap = ((MapFragment) getFragmentManager()
+						.findFragmentById(R.id.MAP_details)).getMap();
+				// check if map is created successfully or not
+				if (googleMap == null) {
+					Toast.makeText(getApplicationContext(),
+							"Sorry! unable to create maps", Toast.LENGTH_SHORT)
+							.show();
+				}
+			}
 		}
 
 		@Override
@@ -77,7 +98,8 @@ public class DetailsActivity extends Activity {
 			try {
 
 				HttpClient hc = new DefaultHttpClient();
-				String path = "https://api.everlive.com/v1/BPHTkWwyt41jYxjq/Places/6956bbf0-52ce-11e4-ac6c-25b0bb1c1807";
+				Log.e("ASDASDASDA", placeId[0]);
+				String path = "https://api.everlive.com/v1/BPHTkWwyt41jYxjq/Places/" +placeId[0];
 				HttpGet get = new HttpGet(path);
 
 				HttpResponse rp = hc.execute(get);
@@ -85,7 +107,7 @@ public class DetailsActivity extends Activity {
 				if (rp.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
 					String result = EntityUtils.toString(rp.getEntity());
 					JSONObject root = new JSONObject(result);
-					placeJsonObject = root.getJSONObject("Result");				
+					placeJsonObject = root.getJSONObject("Result");
 				}
 			} catch (Exception e) {
 				Log.e("HomeActivity", "Error loading JSON", e);
@@ -102,34 +124,31 @@ public class DetailsActivity extends Activity {
 				String capacity = result.getString("capacity");
 				String imageData = result.getString("image");
 				JSONObject location = result.getJSONObject("location");
-				Toast.makeText(context, location.toString(), Toast.LENGTH_LONG).show();
+				double longitude = location.getDouble("longitude");
+				double latitude = location.getDouble("latitude");
 				nameTextView.setText(name);
 				descriptionTextView.setText(description);
 				capacityTextView.setText(capacity);
+				byte[] imageAsBytes = Base64.decode(imageData.getBytes(),
+						Base64.DEFAULT);
+				imageView.setImageBitmap(BitmapFactory.decodeByteArray(
+						imageAsBytes, 0, imageAsBytes.length));
+				MarkerOptions marker = new MarkerOptions().position(
+						new LatLng(latitude, longitude))
+						.title("Your location here");
+				marker.icon(BitmapDescriptorFactory
+						.defaultMarker(BitmapDescriptorFactory.HUE_RED));
+				googleMap.addMarker(marker);
+				CameraPosition cameraPosition = new CameraPosition.Builder()
+						.target(new LatLng(latitude, longitude)).zoom(15)
+						.build();
+
+				googleMap.animateCamera(CameraUpdateFactory
+						.newCameraPosition(cameraPosition));
 			} catch (JSONException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			
 		}
-	}
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.home, menu);
-		return true;
-	}
-
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		// Handle action bar item clicks here. The action bar will
-		// automatically handle clicks on the Home/Up button, so long
-		// as you specify a parent activity in AndroidManifest.xml.
-		int id = item.getItemId();
-		if (id == R.id.action_settings) {
-			return true;
-		}
-		return super.onOptionsItemSelected(item);
 	}
 }

@@ -132,7 +132,7 @@ public class MainActivity extends Activity {
 	private void initilizeMap() {
 		if (googleMap == null) {
 			googleMap = ((MapFragment) getFragmentManager().findFragmentById(
-					R.id.map)).getMap();
+					R.id.MAP_add_place)).getMap();
 
 			// check if map is created successfully or not
 			if (googleMap == null) {

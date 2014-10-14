@@ -9,13 +9,13 @@
         android:orientation="vertical" >
 
         <EditText
-            android:id="@+id/place_name_edit_text"
+            android:id="@+id/ET_add_place_name"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:hint="@string/ET_add_place_name" />
 
         <EditText
-            android:id="@+id/place_description_edit_text"
+            android:id="@+id/ET_add_place_description"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:hint="@string/ET_add_place_desription" />
@@ -33,13 +33,13 @@
             android:layout_height="wrap_content" />
 
         <ImageView
-            android:id="@+id/ImageView01"
+            android:id="@+id/IV_add_image"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" >
         </ImageView>
 
         <fragment
-            android:id="@+id/map"
+            android:id="@+id/MAP_add_place"
             android:name="com.google.android.gms.maps.MapFragment"
             android:layout_width="match_parent"
             android:layout_height="300dp" />
@@ -49,12 +49,6 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:text="@string/Btn_add_place_img" />
-
-        <Button
-            android:id="@+id/Btn_add_place_geo"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/Btn_add_place_geo" />
 
         <Button
             android:id="@+id/Btn_save_place"

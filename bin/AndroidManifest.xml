@@ -59,11 +59,11 @@
         </activity>
         <activity
             android:name="com.garfield.places.ChooseAccountTypeActivity"
-            android:label="@string/add_place_actionbar_label" >
+            android:label="@string/app_name" >
         </activity>
         <activity
             android:name="com.garfield.places.HomeActivity"
-            android:label="@string/home_actionbar_label" >
+            android:label="@string/app_name" >
         </activity>
         <activity
             android:name="com.garfield.places.DetailsActivity"
@@ -75,11 +75,11 @@
         </activity>
         <activity
             android:name="com.garfield.places.ReservationActivity"
-            android:label="@string/add_place_actionbar_label" >
+            android:label="@string/reservation_label" >
         </activity>
         <activity
             android:name="com.garfield.places.HistoryActivity"
-            android:label="@string/add_place_actionbar_label" >
+            android:label="@string/history_label" >
         </activity>
         <activity
             android:name="com.garfield.places.MainActivity"

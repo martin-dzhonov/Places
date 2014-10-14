@@ -38,8 +38,10 @@ import android.widget.Toast;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 
 public class AddPlaceActivity extends Activity {
 	
@@ -71,12 +73,6 @@ public class AddPlaceActivity extends Activity {
 			}
 		});
 
-		final Button geoLocationButton = (Button) findViewById(R.id.Btn_add_place_geo);
-		geoLocationButton.setOnClickListener(new OnClickListener() {
-			public void onClick(View v) {
-			}
-		});
-
 		final Button saveButton = (Button) findViewById(R.id.Btn_save_place);
 		saveButton.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
@@ -101,7 +97,7 @@ public class AddPlaceActivity extends Activity {
 
 			Bitmap yourSelectedImage = BitmapFactory.decodeFile(filePath);
 
-			ImageView iView = (ImageView) findViewById(R.id.ImageView01);
+			ImageView iView = (ImageView) findViewById(R.id.IV_add_image);
 			iView.setImageBitmap(yourSelectedImage);
 
 		}
@@ -127,7 +123,7 @@ public class AddPlaceActivity extends Activity {
 	private void initMap() {
 		if (googleMap == null) {
 			googleMap = ((MapFragment) getFragmentManager().findFragmentById(
-					R.id.map)).getMap();
+					R.id.MAP_add_place)).getMap();
 			// check if map is created successfully or not
 			if (googleMap == null) {
 				Toast.makeText(getApplicationContext(),
@@ -144,6 +140,13 @@ public class AddPlaceActivity extends Activity {
 			LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 			Location location = lm
 					.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+			
+			MarkerOptions marker = new MarkerOptions().position(
+					new LatLng(currLatitute, currLongitude))
+					.title("Your location here");
+			marker.icon(BitmapDescriptorFactory
+					.defaultMarker(BitmapDescriptorFactory.HUE_RED));
+			googleMap.addMarker(marker);
 
 			CameraPosition cameraPosition = new CameraPosition.Builder()
 					.target(new LatLng(currLatitute, currLongitude)).zoom(15)
@@ -165,9 +168,9 @@ public class AddPlaceActivity extends Activity {
 		private NumberPicker nPicker;
 
 		protected void onPreExecute() {
-			namEditText = (EditText) findViewById(R.id.place_name_edit_text);
-			descEditText = (EditText) findViewById(R.id.place_description_edit_text);
-			imageView = (ImageView) findViewById(R.id.ImageView01);
+			namEditText = (EditText) findViewById(R.id.ET_add_place_name);
+			descEditText = (EditText) findViewById(R.id.ET_add_place_description);
+			imageView = (ImageView) findViewById(R.id.IV_add_image);
 			nPicker = (NumberPicker) findViewById(R.id.NP_add_place);
 			progressDialog = ProgressDialog.show(AddPlaceActivity.this, "",
 					"Saving. Please wait...", true);
