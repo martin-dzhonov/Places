@@ -227,7 +227,6 @@ public class AddPlaceActivity extends Activity{
 				httpPost.setHeader("Content-type", "application/json");
 
 				// 8. Execute POST request to the given URL
-				Log.e("ASDF", obj.toString());
 				HttpResponse httpResponse = httpclient.execute(httpPost);
 
 			} catch (Exception e) {

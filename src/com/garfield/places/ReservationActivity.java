@@ -61,7 +61,7 @@ public class ReservationActivity extends Activity {
 			timePicker = (TimePicker) findViewById(R.id.TP_reservation);
 			numberPicker = (NumberPicker) findViewById(R.id.NP_reservation);
 			progressDialog = ProgressDialog.show(ReservationActivity.this, "",
-					"Loading. Please wait...", true);
+					"Saving. Please wait...", true);
 		}
 
 		@Override
@@ -99,10 +99,10 @@ public class ReservationActivity extends Activity {
 				HttpResponse httpResponse = httpclient.execute(httpPut);
 
 			} catch (Exception e) {
-				Log.e("HomeActivity", "Error loading JSON", e);
+				Toast.makeText(context, "Error connecting  to database",
+						Toast.LENGTH_LONG).show();
 			}
 			return null;
-
 		}
 
 		@Override

@@ -24,6 +24,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
+import android.widget.Toast;
 
 public class HomeActivity extends ListActivity {
 	public final static String EXTRA_PLACE_NAME = "com.example.myfirstapp.EXTRA_PLACE_NAME";
@@ -104,13 +105,13 @@ public class HomeActivity extends ListActivity {
 						JSONObject session = sessions.getJSONObject(i);
 						String id = session.getString("Id");
 						String name = session.getString("name");
-						Log.e("asd", id);
 						Place place = new Place(name, id);
 						places.add(place);
 					}
 				}
 			} catch (Exception e) {
-				Log.e("HomeActivity", "Error loading JSON", e);
+				Toast.makeText(context, "Error connecting  to database",
+						Toast.LENGTH_LONG).show();
 			}
 			return null;
 		}

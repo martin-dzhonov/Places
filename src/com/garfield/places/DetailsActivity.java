@@ -34,7 +34,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class DetailsActivity extends Activity {
+public class DetailsActivity extends Activity  {
 
 	Context context = this;
 	public final static String PLACE_ID = "com.example.myfirstapp.PLACE_ID";
@@ -67,7 +67,7 @@ public class DetailsActivity extends Activity {
 
 		protected void onPreExecute() {
 			progressDialog = ProgressDialog.show(DetailsActivity.this, "",
-					"Fetching data. Please wait...", true);
+					"Loading. Please wait...", true);
 			nameTextView = (TextView) findViewById(R.id.TV_details_name);
 			descriptionTextView = (TextView) findViewById(R.id.TV_details_description);
 			capacityTextView = (TextView) findViewById(R.id.TV_details_capacity);
@@ -103,7 +103,8 @@ public class DetailsActivity extends Activity {
 					placeJsonObject = root.getJSONObject("Result");
 				}
 			} catch (Exception e) {
-				Log.e("HomeActivity", "Error loading JSON", e);
+				Toast.makeText(context, "Error connecting  to database",
+						Toast.LENGTH_LONG).show();
 			}
 			return placeJsonObject;
 		}
