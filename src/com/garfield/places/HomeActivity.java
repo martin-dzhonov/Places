@@ -13,6 +13,7 @@ import org.json.JSONObject;
 
 import com.garfield.places.R;
 
+import android.app.Activity;
 import android.app.ListActivity;
 import android.app.ProgressDialog;
 import android.content.ClipData.Item;
@@ -25,30 +26,34 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
-public class HomeActivity extends ListActivity {
+public class HomeActivity extends Activity {
 	public final static String EXTRA_PLACE_NAME = "com.example.myfirstapp.EXTRA_PLACE_NAME";
 	public final static String EXTRA_PLACE_ID = "com.example.myfirstapp.EXTRA_PLACE_ID";
 	private Context context = this;
-	private ArrayList<Place> places = new ArrayList<Place>();
+	
+	GridView MyGrid;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_home);
+		MyGrid = (GridView) findViewById(R.id.gridView1);
 		new PopulatePlacesTask().execute();
 	}
-	
+
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		MenuInflater inflater = getMenuInflater();
 		inflater.inflate(R.menu.home, menu);
-		
+
 		if (AccountGeneral.ACCOUNT_TYPE_CUSTOMER == AccountGeneral.USER_ACCOUNT_TYPE) {
 			menu.findItem(R.id.action_create_place).setVisible(false);
 		}
-		
 		return true;
 	}
 
@@ -75,27 +80,17 @@ public class HomeActivity extends ListActivity {
 		return true;
 	}
 
-	@Override
-	protected void onListItemClick(ListView l, View v, int position, long id) {
-		// TODO Auto-generated method stub
-		super.onListItemClick(l, v, position, id);
-		Intent intent = new Intent(context, DetailsActivity.class);
-		String message = places.get(position).getId();
-		intent.putExtra(EXTRA_PLACE_ID, message);
-		startActivity(intent);
-	}
-
-	private class PopulatePlacesTask extends AsyncTask<Void, Void, Void> {
+	private class PopulatePlacesTask extends AsyncTask<Void, Void, ArrayList<Place>> {
 		private ProgressDialog progressDialog;
-
+		
 		protected void onPreExecute() {
-			places = new ArrayList<Place>();
 			progressDialog = ProgressDialog.show(HomeActivity.this, "",
 					"Fetching data. Please wait...", true);
 		}
 
 		@Override
-		protected Void doInBackground(Void... arg0) {
+		protected ArrayList<Place> doInBackground(Void... arg0) {
+			ArrayList<Place> places = new ArrayList<Place>();
 			try {
 
 				HttpClient hc = new DefaultHttpClient();
@@ -121,13 +116,13 @@ public class HomeActivity extends ListActivity {
 				Toast.makeText(context, "Error connecting  to database",
 						Toast.LENGTH_LONG).show();
 			}
-			return null;
+			return places;
 		}
 
 		@Override
-		protected void onPostExecute(Void result) {
+		protected void onPostExecute(ArrayList<Place> result) {
 			progressDialog.dismiss();
-			setListAdapter(new PlacesAdapter(HomeActivity.this, places));
+			MyGrid.setAdapter(new PlacesAdapter(HomeActivity.this, result));
 		}
 	}
 }

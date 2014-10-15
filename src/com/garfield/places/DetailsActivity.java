@@ -119,7 +119,6 @@ public class DetailsActivity extends Activity  {
 			try {
 
 				HttpClient hc = new DefaultHttpClient();
-				Log.e("ASDASDASDA", placeId[0]);
 				String path = "https://api.everlive.com/v1/BPHTkWwyt41jYxjq/Places/" +placeId[0];
 				HttpGet get = new HttpGet(path);
 

@@ -1471,6 +1471,8 @@ containing a value of this type.
         public static final int Btn_account_type_place=0x7f080056;
         public static final int Btn_add_place_img=0x7f080054;
         public static final int Btn_make_reservation=0x7f08005e;
+        public static final int Btn_popup_gallery=0x7f08006f;
+        public static final int Btn_popup_photo=0x7f080070;
         public static final int Btn_save_place=0x7f080055;
         public static final int Btn_save_reservation=0x7f08006b;
         public static final int ET_add_place_description=0x7f08004f;
@@ -1480,7 +1482,6 @@ containing a value of this type.
         public static final int IV_details_image=0x7f08005c;
         public static final int IV_home_item=0x7f08006c;
         public static final int LV_history=0x7f08005f;
-        public static final int LV_home=0x7f080060;
         public static final int MAP_add_place=0x7f080053;
         public static final int MAP_details=0x7f08005d;
         public static final int NP_add_place=0x7f080051;
@@ -1500,13 +1501,13 @@ containing a value of this type.
         public static final int action_bar_subtitle=0x7f080035;
         public static final int action_bar_title=0x7f080034;
         public static final int action_context_bar=0x7f08002f;
-        public static final int action_create_place=0x7f080076;
-        public static final int action_history=0x7f080074;
+        public static final int action_create_place=0x7f080078;
+        public static final int action_history=0x7f080076;
         public static final int action_menu_divider=0x7f080028;
         public static final int action_menu_presenter=0x7f080029;
         public static final int action_mode_close_button=0x7f080036;
-        public static final int action_refresh=0x7f080075;
-        public static final int action_settings=0x7f080077;
+        public static final int action_refresh=0x7f080077;
+        public static final int action_settings=0x7f080079;
         public static final int activity_chooser_view_content=0x7f080037;
         public static final int always=0x7f08001e;
         public static final int beginning=0x7f080023;
@@ -1521,7 +1522,7 @@ containing a value of this type.
         public static final int checkbox=0x7f08003f;
         public static final int classic=0x7f080011;
         public static final int collapseActionView=0x7f080020;
-        public static final int date=0x7f080070;
+        public static final int date=0x7f080074;
         public static final int default_activity_button=0x7f08003a;
         public static final int details_layout=0x7f080058;
         public static final int dialog=0x7f080021;
@@ -1532,6 +1533,7 @@ containing a value of this type.
         public static final int expand_activities_button=0x7f080038;
         public static final int expanded_menu=0x7f08003e;
         public static final int grayscale=0x7f080012;
+        public static final int gridView1=0x7f080060;
         public static final int holo_dark=0x7f080005;
         public static final int holo_light=0x7f080006;
         public static final int home=0x7f080026;
@@ -1549,13 +1551,13 @@ containing a value of this type.
         public static final int never=0x7f08001c;
         public static final int none=0x7f080000;
         public static final int normal=0x7f080001;
-        public static final int peopleNumber=0x7f08006f;
+        public static final int peopleNumber=0x7f080073;
         public static final int placeName=0x7f080072;
         public static final int production=0x7f080007;
         public static final int progress_circular=0x7f08002a;
         public static final int progress_horizontal=0x7f08002b;
         public static final int radio=0x7f080041;
-        public static final int reservationName=0x7f080073;
+        public static final int reservationName=0x7f080075;
         public static final int restourantImage=0x7f080071;
         public static final int sandbox=0x7f080008;
         public static final int satellite=0x7f080002;
@@ -1648,8 +1650,9 @@ containing a value of this type.
         public static final int activity_login=0x7f03001e;
         public static final int activity_reservation=0x7f03001f;
         public static final int list_single_item=0x7f030020;
-        public static final int reservation_layout=0x7f030021;
-        public static final int support_simple_spinner_dropdown_item=0x7f030022;
+        public static final int popup=0x7f030021;
+        public static final int reservation_layout=0x7f030022;
+        public static final int support_simple_spinner_dropdown_item=0x7f030023;
     }
     public static final class menu {
         public static final int home=0x7f0c0000;
