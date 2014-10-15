@@ -1,7 +1,5 @@
 package com.garfield.places;
 
-import com.garfield.places.R;
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -9,6 +7,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+
+import com.orm.SugarApp;
 
 public class ChooseAccountTypeActivity extends Activity {
 	Context context = this;
@@ -21,6 +21,7 @@ public class ChooseAccountTypeActivity extends Activity {
 		placeButton.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
 				AccountGeneral.USER_ACCOUNT_TYPE = AccountGeneral.ACCOUNT_TYPE_PLACE;
+				SugarApp.getSugarContext().deleteDatabase("places.db");
 				Intent intent = new Intent(context, HomeActivity.class);
 				startActivity(intent);
 			}

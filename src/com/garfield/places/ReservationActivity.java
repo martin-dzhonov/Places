@@ -65,7 +65,7 @@ public class ReservationActivity extends Activity {
 	}
 	
 	private void saveReservationToSql(String name, Date date, int numberOfPeople, String placeId, 
-			String placeName, String capacity, String description, Bitmap image) {
+			String placeName, String capacity, String description, String image) {
 		Reservation reservation = new Reservation(name, date, numberOfPeople, placeId, 
 				placeName, capacity, description, image);
 		
@@ -96,7 +96,7 @@ public class ReservationActivity extends Activity {
 			String placeName = info.getString(DetailsActivity.PLACE_NAME_KEY);
 			String capacity = info.getString(DetailsActivity.CAPACITY_KEY);
 			String description = info.getString(DetailsActivity.DESCRIPTION_KEY);
-			Bitmap image = (Bitmap)info.getParcelable(DetailsActivity.IMAGE_KEY);
+			String image = info.getString(DetailsActivity.IMAGE_KEY);
 			
 			saveReservationToSql(name, cal.getTime(), numberOfPeople, placeId, 
 					placeName, capacity, description, image);

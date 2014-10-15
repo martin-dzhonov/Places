@@ -2,6 +2,7 @@ package com.garfield.places;
 
 import java.util.Date;
 
+import android.R.string;
 import android.graphics.Bitmap;
 
 import com.orm.SugarRecord;
@@ -14,13 +15,13 @@ public class Reservation extends SugarRecord<Reservation> {
 	private String placeName;
 	private String capacity;
 	private String description;
-	private Bitmap image;
+	private String image;
 	
 	public Reservation() {
 	}
 	
 	public Reservation(String name, Date date, int numberOfPeople, String placeId, 
-			String placeName, String capacity, String description, Bitmap image) {
+			String placeName, String capacity, String description, String image) {
 		this.setName(name);
 		this.setDate(date);
 		this.setNumberOfPeople(numberOfPeople);
@@ -87,11 +88,11 @@ public class Reservation extends SugarRecord<Reservation> {
 		this.description = description;
 	}
 
-	public Bitmap getImage() {
+	public String getImage() {
 		return image;
 	}
 
-	public void setImage(Bitmap image) {
+	public void setImage(String image) {
 		this.image = image;
 	}
 }

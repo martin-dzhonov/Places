@@ -1,5 +1,7 @@
 package com.garfield.places;
 
+import java.io.ByteArrayOutputStream;
+
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
 import org.apache.http.client.HttpClient;
@@ -22,6 +24,7 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.AsyncTask;
@@ -65,14 +68,22 @@ public class DetailsActivity extends Activity  {
 				info.putString(PLACE_NAME_KEY, nameTextView.getText().toString());
 				info.putString(CAPACITY_KEY, capacityTextView.getText().toString());
 				info.putString(DESCRIPTION_KEY, descriptionTextView.getText().toString());
-				info.putParcelable(IMAGE_KEY, ((BitmapDrawable)imageView.getDrawable()).getBitmap());
+				info.putString(IMAGE_KEY, encodeTobase64(((BitmapDrawable)imageView.getDrawable()).getBitmap()));
 				
 				reserveIntent.putExtras(info);
 				startActivity(reserveIntent);
 			}
 		});
 	}
+	private static String encodeTobase64(Bitmap image) {
+		Bitmap immagex = image;
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		immagex.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+		byte[] b = baos.toByteArray();
+		String imageEncoded = Base64.encodeToString(b, Base64.DEFAULT);
 
+		return imageEncoded;
+	}
 	private class LoadPlaceDetails extends AsyncTask<String, Void, JSONObject> {
 		private ProgressDialog progressDialog;
 		private GoogleMap googleMap;
