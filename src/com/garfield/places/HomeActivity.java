@@ -44,6 +44,15 @@ public class HomeActivity extends Activity {
 		setContentView(R.layout.activity_home);
 		MyGrid = (GridView) findViewById(R.id.gridView1);
 		new PopulatePlacesTask().execute();
+		//TODO: Implement grind onItemClick
+		//protected void onListItemClick(ListView l, View v, int position, long id) {
+			// TODO Auto-generated method stub
+		//	super.onListItemClick(l, v, position, id);
+		//	Intent intent = new Intent(context, DetailsActivity.class);
+		//	String message = places.get(position).getId();
+		//	intent.putExtra(EXTRA_PLACE_ID, message);
+		//	startActivity(intent);
+		//}
 	}
 
 	@Override
