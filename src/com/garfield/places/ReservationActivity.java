@@ -48,7 +48,6 @@ public class ReservationActivity extends Activity {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_reservation);
-		
 		Intent intent = getIntent();
 		info = intent.getExtras();
 		placeId = info.getString(DetailsActivity.PLACE_ID);
