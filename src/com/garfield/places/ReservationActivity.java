@@ -1,5 +1,10 @@
 package com.garfield.places;
 
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.Calendar;
+import java.util.Iterator;
+
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
@@ -10,6 +15,7 @@ import org.json.JSONObject;
 
 import com.garfield.places.R;
 
+import android.R.integer;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -18,6 +24,7 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -30,6 +37,8 @@ import android.widget.Toast;
 
 public class ReservationActivity extends Activity {
 	Context context = this;
+	private String placeId;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -37,7 +46,7 @@ public class ReservationActivity extends Activity {
 		setContentView(R.layout.activity_reservation);
 		
 		Intent intent = getIntent();
-		final String placeId = intent.getStringExtra(DetailsActivity.PLACE_ID);
+		placeId = intent.getStringExtra(DetailsActivity.PLACE_ID);
 		
 		initNumberPicker();
 		
@@ -50,6 +59,23 @@ public class ReservationActivity extends Activity {
 			}
 		});
 	}
+	
+	private void saveReservationToSql(String name, Date date, int numberOfPeople, String placeId) {
+		Reservation reservation = new Reservation(name, date, numberOfPeople,placeId);
+		reservation.save();
+//		Iterator<Reservation> reservs = Reservation.findAll(Reservation.class);
+//		
+//		while (reservs.hasNext()) {
+//			Toast.makeText(this.getApplicationContext(), reservs.next().getName(), Toast.LENGTH_SHORT);
+//			try {
+//				Thread.sleep(2000);
+//			} catch (InterruptedException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+//		}
+	}
+	
 	private class EverlivePut extends AsyncTask<String, Void, Void> {
 		private ProgressDialog progressDialog;
 		private EditText namEditText;
@@ -62,6 +88,16 @@ public class ReservationActivity extends Activity {
 			numberPicker = (NumberPicker) findViewById(R.id.NP_reservation);
 			progressDialog = ProgressDialog.show(ReservationActivity.this, "",
 					"Saving. Please wait...", true);
+			
+			String name = namEditText.getText().toString();
+			
+			Calendar cal = Calendar.getInstance();
+			cal.set(Calendar.HOUR, timePicker.getCurrentHour());
+			cal.set(Calendar.MINUTE, timePicker.getCurrentMinute());
+			
+			int numberOfPeople = numberPicker.getValue();
+			
+			saveReservationToSql(name, cal.getTime(), numberOfPeople, placeId);
 		}
 
 		@Override
