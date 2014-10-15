@@ -50,8 +50,9 @@ public class AddPlaceActivity extends Activity implements OnClickListener {
 	private GoogleMap googleMap;
 	private double currLatitute;
 	private double currLongitude;
-	private Button btnOpenPopup;
-	private PopupWindow popUp;
+	private Button addImgButton;
+	private Button addPhotoButton;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -63,9 +64,10 @@ public class AddPlaceActivity extends Activity implements OnClickListener {
 
 		initNumberPicker();
 		initMap();
-		btnOpenPopup = (Button) findViewById(R.id.Btn_add_place_img);
-		btnOpenPopup.setOnClickListener(this);
-
+		addImgButton = (Button) findViewById(R.id.Btn_add_place_img);
+		addImgButton.setOnClickListener(this);
+		addPhotoButton = (Button) findViewById(R.id.Btn_add_place_photo);
+		addPhotoButton.setOnClickListener(this);
 
 		final Button saveButton = (Button) findViewById(R.id.Btn_save_place);
 		saveButton.setOnClickListener(new OnClickListener() {
@@ -78,41 +80,15 @@ public class AddPlaceActivity extends Activity implements OnClickListener {
 	@Override
 	public void onClick(View v) {
 		if (v.getId() == R.id.Btn_add_place_img) {
-			LayoutInflater layoutInflater = (LayoutInflater) getBaseContext()
-					.getSystemService(LAYOUT_INFLATER_SERVICE);
-			View popupView = layoutInflater.inflate(R.layout.popup, null);
-			final PopupWindow popupWindow = new PopupWindow(popupView,
-					LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
-	
-			Button btnGallery = (Button) popupView
-					.findViewById(R.id.Btn_popup_gallery);
-			btnGallery.setOnClickListener(new Button.OnClickListener() {
-
-				@Override
-				public void onClick(View v) {
-					popupWindow.dismiss();
-					Intent i = new Intent(
-							Intent.ACTION_PICK,
-							android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-					startActivityForResult(i, IMAGE_PICKER_SELECT);
-					
-				}
-			});
-			Button btnPhoto = (Button) popupView
-					.findViewById(R.id.Btn_popup_photo);
-			btnPhoto.setOnClickListener(new Button.OnClickListener() {
-
-				@Override
-				public void onClick(View v) {
-					popupWindow.dismiss();
-					Intent takePictureIntent = new Intent(
-							MediaStore.ACTION_IMAGE_CAPTURE);
-					startActivityForResult(takePictureIntent,
-							REQUEST_IMAGE_CAPTURE);
-				}
-			});
-			
-			popupWindow.showAsDropDown(btnOpenPopup, 100, -50);
+			Intent i = new Intent(
+					Intent.ACTION_PICK,
+					android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+			startActivityForResult(i, IMAGE_PICKER_SELECT);
+		}
+		if (v.getId() == R.id.Btn_add_place_photo) {
+			Intent takePictureIntent = new Intent(
+					MediaStore.ACTION_IMAGE_CAPTURE);
+			startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
 		}
 	}
 

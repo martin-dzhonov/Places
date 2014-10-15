@@ -35,7 +35,7 @@ public class HomeActivity extends Activity {
 	public final static String EXTRA_PLACE_NAME = "com.example.myfirstapp.EXTRA_PLACE_NAME";
 	public final static String EXTRA_PLACE_ID = "com.example.myfirstapp.EXTRA_PLACE_ID";
 	private Context context = this;
-	
+
 	GridView MyGrid;
 
 	@Override
@@ -80,9 +80,10 @@ public class HomeActivity extends Activity {
 		return true;
 	}
 
-	private class PopulatePlacesTask extends AsyncTask<Void, Void, ArrayList<Place>> {
+	private class PopulatePlacesTask extends
+			AsyncTask<Void, Void, ArrayList<Place>> {
 		private ProgressDialog progressDialog;
-		
+
 		protected void onPreExecute() {
 			progressDialog = ProgressDialog.show(HomeActivity.this, "",
 					"Fetching data. Please wait...", true);

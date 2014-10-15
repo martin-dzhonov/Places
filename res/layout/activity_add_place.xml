@@ -50,6 +50,12 @@
             android:layout_height="wrap_content"
             android:text="@string/Btn_add_place_img" />
 
+        <Button
+            android:id="@+id/Btn_add_place_photo"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Take photo" />
+        
 
         <Button
             android:id="@+id/Btn_save_place"
