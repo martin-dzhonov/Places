@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 public class ReservationsAdapter extends ArrayAdapter<Reservation> {
@@ -35,6 +36,8 @@ public class ReservationsAdapter extends ArrayAdapter<Reservation> {
 			holder.placeNameView = (TextView)convertView.findViewById(R.id.placeName);
 			holder.dateView = (TextView)convertView.findViewById(R.id.date);
 			holder.peopleNumberView = (TextView)convertView.findViewById(R.id.peopleNumber);
+			holder.reservationNameView = (TextView)convertView.findViewById(R.id.reservationName);
+			holder.imageView = (ImageView)convertView.findViewById(R.id.restourantImage);
 			
 			convertView.setTag(holder);
 		} else {
@@ -44,20 +47,23 @@ public class ReservationsAdapter extends ArrayAdapter<Reservation> {
 		Reservation reservation = this.reservations.get(position);
 		
 		if(reservation != null) {
-			holder.placeNameView.setText("Place name here");
+			holder.reservationNameView.setText(reservation.getName());
+			holder.placeNameView.setText(reservation.getPlaceName());
 			
 			Date date = reservation.getDate();
 			holder.dateView.setText(getDateAsString(date));
 			
 			int peopleNumber = reservation.getNumberOfPeople();
 			holder.peopleNumberView.setText(String.valueOf(peopleNumber));
+			
+			holder.imageView.setImageBitmap(reservation.getImage());
 		}
 		
 		return convertView;
 	}
 	
 	private String getDateAsString(Date date) {
-		SimpleDateFormat format = new SimpleDateFormat("HH:mm dd:MM", Locale.US);
+		SimpleDateFormat format = new SimpleDateFormat("HH:mm dd.MM", Locale.US);
 		return format.format(date);
 	}
 	
@@ -65,5 +71,7 @@ public class ReservationsAdapter extends ArrayAdapter<Reservation> {
 		public TextView placeNameView;
 		public TextView dateView;
 		public TextView peopleNumberView;
+		public TextView reservationNameView;
+		public ImageView imageView;
 	}
 }

@@ -23,6 +23,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Base64;
@@ -35,9 +36,17 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class DetailsActivity extends Activity  {
+	private TextView nameTextView;
+	private TextView descriptionTextView;
+	private TextView capacityTextView;
+	private ImageView imageView;
 
 	Context context = this;
 	public final static String PLACE_ID = "com.example.myfirstapp.PLACE_ID";
+	public final static String PLACE_NAME_KEY = "PLACE_NAME";
+	public final static String CAPACITY_KEY = "CAPACITY";
+	public final static String DESCRIPTION_KEY = "DESCRIPTION";
+	public final static String IMAGE_KEY = "IMAGE";
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -51,7 +60,14 @@ public class DetailsActivity extends Activity  {
 		button.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {			
 				Intent reserveIntent = new Intent(context, ReservationActivity.class);
-				reserveIntent.putExtra(PLACE_ID, placeId);
+				Bundle info = new Bundle();
+				info.putString(PLACE_ID, placeId);
+				info.putString(PLACE_NAME_KEY, nameTextView.getText().toString());
+				info.putString(CAPACITY_KEY, capacityTextView.getText().toString());
+				info.putString(DESCRIPTION_KEY, descriptionTextView.getText().toString());
+				info.putParcelable(IMAGE_KEY, ((BitmapDrawable)imageView.getDrawable()).getBitmap());
+				
+				reserveIntent.putExtras(info);
 				startActivity(reserveIntent);
 			}
 		});
@@ -59,10 +75,6 @@ public class DetailsActivity extends Activity  {
 
 	private class LoadPlaceDetails extends AsyncTask<String, Void, JSONObject> {
 		private ProgressDialog progressDialog;
-		private TextView nameTextView;
-		private TextView descriptionTextView;
-		private TextView capacityTextView;
-		private ImageView imageView;
 		private GoogleMap googleMap;
 
 		protected void onPreExecute() {

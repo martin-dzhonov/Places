@@ -14,8 +14,11 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONObject;
 
 import com.garfield.places.R;
+import com.orm.SugarApp;
+import com.orm.SugarDb;
 
 import android.R.integer;
+import android.R.string;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -38,6 +41,7 @@ import android.widget.Toast;
 public class ReservationActivity extends Activity {
 	Context context = this;
 	private String placeId;
+	private Bundle info;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +50,8 @@ public class ReservationActivity extends Activity {
 		setContentView(R.layout.activity_reservation);
 		
 		Intent intent = getIntent();
-		placeId = intent.getStringExtra(DetailsActivity.PLACE_ID);
+		info = intent.getExtras();
+		placeId = info.getString(DetailsActivity.PLACE_ID);
 		
 		initNumberPicker();
 		
@@ -60,20 +65,12 @@ public class ReservationActivity extends Activity {
 		});
 	}
 	
-	private void saveReservationToSql(String name, Date date, int numberOfPeople, String placeId) {
-		Reservation reservation = new Reservation(name, date, numberOfPeople,placeId);
+	private void saveReservationToSql(String name, Date date, int numberOfPeople, String placeId, 
+			String placeName, String capacity, String description, Bitmap image) {
+		Reservation reservation = new Reservation(name, date, numberOfPeople, placeId, 
+				placeName, capacity, description, image);
+		
 		reservation.save();
-//		Iterator<Reservation> reservs = Reservation.findAll(Reservation.class);
-//		
-//		while (reservs.hasNext()) {
-//			Toast.makeText(this.getApplicationContext(), reservs.next().getName(), Toast.LENGTH_SHORT);
-//			try {
-//				Thread.sleep(2000);
-//			} catch (InterruptedException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
-//		}
 	}
 	
 	private class EverlivePut extends AsyncTask<String, Void, Void> {
@@ -97,7 +94,13 @@ public class ReservationActivity extends Activity {
 			
 			int numberOfPeople = numberPicker.getValue();
 			
-			saveReservationToSql(name, cal.getTime(), numberOfPeople, placeId);
+			String placeName = info.getString(DetailsActivity.PLACE_NAME_KEY);
+			String capacity = info.getString(DetailsActivity.CAPACITY_KEY);
+			String description = info.getString(DetailsActivity.DESCRIPTION_KEY);
+			Bitmap image = (Bitmap)info.getParcelable(DetailsActivity.IMAGE_KEY);
+			
+			saveReservationToSql(name, cal.getTime(), numberOfPeople, placeId, 
+					placeName, capacity, description, image);
 		}
 
 		@Override
