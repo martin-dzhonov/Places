@@ -1,6 +1,7 @@
 package com.garfield.places;
 
 import java.util.ArrayList;
+
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
 import org.apache.http.client.HttpClient;
@@ -14,6 +15,7 @@ import com.garfield.places.R;
 
 import android.app.ListActivity;
 import android.app.ProgressDialog;
+import android.content.ClipData.Item;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -42,6 +44,11 @@ public class HomeActivity extends ListActivity {
 	public boolean onCreateOptionsMenu(Menu menu) {
 		MenuInflater inflater = getMenuInflater();
 		inflater.inflate(R.menu.home, menu);
+		
+		if (AccountGeneral.ACCOUNT_TYPE_CUSTOMER == AccountGeneral.USER_ACCOUNT_TYPE) {
+			menu.findItem(R.id.action_create_place).setVisible(false);
+		}
+		
 		return true;
 	}
 

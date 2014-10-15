@@ -27,6 +27,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
+import android.opengl.Visibility;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Base64;
@@ -58,6 +59,10 @@ public class DetailsActivity extends Activity  {
 		Intent intent = getIntent();
 		final String placeId = intent.getStringExtra(HomeActivity.EXTRA_PLACE_ID);
 		new LoadPlaceDetails().execute(placeId);
+		
+		if (AccountGeneral.ACCOUNT_TYPE_PLACE == AccountGeneral.USER_ACCOUNT_TYPE) {
+			this.findViewById(R.id.Btn_make_reservation).setVisibility(View.GONE);
+		}
 
 		final Button button = (Button) findViewById(R.id.Btn_make_reservation);
 		button.setOnClickListener(new OnClickListener() {

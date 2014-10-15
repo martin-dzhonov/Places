@@ -21,7 +21,6 @@ public class ChooseAccountTypeActivity extends Activity {
 		placeButton.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
 				AccountGeneral.USER_ACCOUNT_TYPE = AccountGeneral.ACCOUNT_TYPE_PLACE;
-				SugarApp.getSugarContext().deleteDatabase("places.db");
 				Intent intent = new Intent(context, HomeActivity.class);
 				startActivity(intent);
 			}
