@@ -59,10 +59,6 @@ public class PlaceDetailsActivity extends Activity  {
 		Intent intent = getIntent();
 		final String placeId = intent.getStringExtra(HomeActivity.EXTRA_PLACE_ID);
 		new LoadPlaceDetails().execute(placeId);
-		
-		if (AccountGeneral.ACCOUNT_TYPE_PLACE == AccountGeneral.USER_ACCOUNT_TYPE) {
-			this.findViewById(R.id.Btn_make_reservation).setVisibility(View.GONE);
-		}
 
 		final Button button = (Button) findViewById(R.id.Btn_make_reservation);
 		button.setOnClickListener(new OnClickListener() {
