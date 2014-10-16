@@ -9,6 +9,7 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONObject;
 
+import android.R.bool;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -178,18 +179,34 @@ public class SuggestPlaceActivity extends Activity implements OnClickListener {
 			// TODO: handle exception
 		}
 	}
+	
+	private boolean validateInfo(String name, String desc, 
+			String website, String phoneNumber, String openTime) {
+		if (name.equals("") || desc.equals("") || website.equals("")
+				|| phoneNumber.equals("") || openTime.equals("")) {
+			return false;
+		}
+		
+		return true;
+	}
 
 	private class EverlivePost extends AsyncTask<Void, Void, Boolean> {
 		private ProgressDialog progressDialog;
-		private EditText namEditText;
+		private EditText nameEditText;
 		private EditText descEditText;
 		private ImageView imageView;
-		private NumberPicker nPicker;
+		private EditText websiteEditText;
+		private EditText phoneNumberEditText;
+		private EditText openFromToEditText;
 
 		protected void onPreExecute() {
-			namEditText = (EditText) findViewById(R.id.ET_add_place_name);
+			nameEditText = (EditText) findViewById(R.id.ET_add_place_name);
 			descEditText = (EditText) findViewById(R.id.ET_add_place_description);
 			imageView = (ImageView) findViewById(R.id.IV_add_image);
+			websiteEditText = (EditText) findViewById(R.id.ET_add_place_website);
+			phoneNumberEditText = (EditText) findViewById(R.id.ET_add_place_phone_number);
+			openFromToEditText = (EditText) findViewById(R.id.ET_add_place_open_from_to);
+			
 			progressDialog = ProgressDialog.show(SuggestPlaceActivity.this, "",
 					"Saving. Please wait...", true);
 		}
@@ -197,9 +214,15 @@ public class SuggestPlaceActivity extends Activity implements OnClickListener {
 		@Override
 		protected Boolean doInBackground(Void... arg0) {
 			try {
-				String name = namEditText.getText().toString();
+				String name = nameEditText.getText().toString();
 				String desc = descEditText.getText().toString();
-				if (name.equals("") || desc.equals("")) {
+				String website = websiteEditText.getText().toString();
+				String phoneNumber = phoneNumberEditText.getText().toString();
+				String openFromTo = openFromToEditText.getText().toString();
+				
+				boolean isValid = validateInfo(name, desc, website, phoneNumber, openFromTo);
+				
+				if (!isValid) {
 					return false;
 				}
 				if (imageView.getDrawable() == null) {
@@ -207,7 +230,11 @@ public class SuggestPlaceActivity extends Activity implements OnClickListener {
 				}
 				JSONObject obj = new JSONObject();
 				obj.put("name", name);
-				obj.put("description", descEditText.getText().toString());
+				obj.put("description", desc);
+				obj.put("website", website);
+				obj.put("phoneNumber", phoneNumber);
+				obj.put("openFromTo", openFromTo);
+				obj.put("hasOnlineReservation", false);
 
 				JSONObject location = new JSONObject();
 				location.put("longitude", currLongitude);
@@ -256,8 +283,14 @@ public class SuggestPlaceActivity extends Activity implements OnClickListener {
 				Intent intent = new Intent(context, HomeActivity.class);
 				startActivity(intent);
 			} else {
-				if (namEditText.getText().toString().equals("")
-						|| descEditText.getText().toString().equals("")) {
+				boolean isValid = validateInfo(
+						nameEditText.getText().toString(),
+						descEditText.getText().toString(), 
+						websiteEditText.getText().toString(),
+						phoneNumberEditText.getText().toString(),
+						openFromToEditText.getText().toString());
+				
+				if (!isValid) {
 					Toast.makeText(context, "All text field are required.",
 							Toast.LENGTH_SHORT).show();
 				} else if (imageView.getDrawable() == null) {
