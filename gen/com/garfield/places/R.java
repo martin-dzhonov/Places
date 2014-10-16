@@ -1661,22 +1661,23 @@ containing a value of this type.
         public static final int reservations_menu=0x7f0c0001;
     }
     public static final class string {
-        public static final int Btn_add_acount_cancel=0x7f06003b;
-        public static final int Btn_add_acount_ok=0x7f06003c;
-        public static final int Btn_add_place_geo=0x7f060044;
-        public static final int Btn_add_place_img=0x7f060043;
-        public static final int Btn_choose_account_customer=0x7f060042;
-        public static final int Btn_choose_account_place=0x7f060041;
+        public static final int Btn_add_acount_cancel=0x7f06003c;
+        public static final int Btn_add_acount_ok=0x7f06003d;
+        public static final int Btn_add_place_geo=0x7f060045;
+        public static final int Btn_add_place_img=0x7f060044;
+        public static final int Btn_choose_account_customer=0x7f060043;
+        public static final int Btn_choose_account_place=0x7f060042;
         public static final int Btn_make_reservation_online=0x7f060033;
         public static final int Btn_note_reservation=0x7f060034;
-        public static final int Btn_save_reservation=0x7f060045;
-        public static final int Btn_suggest_place=0x7f060037;
-        public static final int ET_add_place_desription=0x7f060036;
-        public static final int ET_add_place_open_from_to=0x7f06004c;
-        public static final int ET_add_place_phone_number=0x7f06004b;
-        public static final int ET_add_place_website=0x7f06004a;
+        public static final int Btn_save_reservation=0x7f060046;
+        public static final int Btn_suggest_place=0x7f060038;
+        public static final int ET_add_place_desription=0x7f060037;
+        public static final int ET_add_place_name=0x7f060036;
+        public static final int ET_add_place_open_from_to=0x7f06004d;
+        public static final int ET_add_place_phone_number=0x7f06004c;
+        public static final int ET_add_place_website=0x7f06004b;
         public static final int ET_add_reservation_name=0x7f060035;
-        public static final int TV_choose_account_text=0x7f060040;
+        public static final int TV_choose_account_text=0x7f060041;
         public static final int TV_details_description=0x7f060032;
         public static final int TV_details_name=0x7f060031;
         /**  Content description for the action bar "home" affordance. [CHAR LIMIT=NONE] 
@@ -1720,11 +1721,11 @@ containing a value of this type.
          */
         public static final int abc_shareactionprovider_share_with_application=0x7f06002e;
         public static final int accept=0x7f060002;
-        public static final int account_type=0x7f06003d;
-        public static final int add_place_actionbar_label=0x7f060038;
+        public static final int account_type=0x7f06003e;
+        public static final int add_place_actionbar_label=0x7f060039;
         public static final int app_name=0x7f060030;
-        public static final int btn_logout_from_google=0x7f06003f;
-        public static final int btn_revoke_access=0x7f06003e;
+        public static final int btn_logout_from_google=0x7f060040;
+        public static final int btn_revoke_access=0x7f06003f;
         /**   Text for notification shown when the Android Wear apps needs to be updated. Only shown on the wearable. [CHAR LIMIT=NONE] 
          */
         public static final int common_android_wear_notification_needs_update_text=0x7f060009;
@@ -1827,14 +1828,14 @@ containing a value of this type.
         public static final int create_calendar_message=0x7f060005;
         public static final int create_calendar_title=0x7f060004;
         public static final int decline=0x7f060003;
-        public static final int details_actionbar_label=0x7f06003a;
-        public static final int details_activity_label=0x7f060039;
-        public static final int refresh=0x7f060048;
-        public static final int reservation_label=0x7f060047;
-        public static final int reservations_label=0x7f060046;
+        public static final int details_actionbar_label=0x7f06003b;
+        public static final int details_activity_label=0x7f06003a;
+        public static final int refresh=0x7f060049;
+        public static final int reservation_label=0x7f060048;
+        public static final int reservations_label=0x7f060047;
         public static final int store_picture_message=0x7f060001;
         public static final int store_picture_title=0x7f060000;
-        public static final int suggest=0x7f060049;
+        public static final int suggest=0x7f06004a;
         /**  Text on a placeholder buy button when Google Play services is not
          available or up-to-date 
          */

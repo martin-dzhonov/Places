@@ -82,7 +82,7 @@ public class SuggestPlaceActivity extends Activity implements OnClickListener {
 		if (v.getId() == R.id.Btn_add_place_img) {
 			Intent addImageIntent = new Intent(
 					Intent.ACTION_PICK,
-					android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+					android.provider.MediaStore.Images.Media.INTERNAL_CONTENT_URI);
 			startActivityForResult(addImageIntent, IMAGE_PICKER_SELECT);
 		}
 		

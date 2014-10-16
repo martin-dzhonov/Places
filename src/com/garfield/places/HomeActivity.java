@@ -41,7 +41,7 @@ public class HomeActivity extends Activity {
 	private Context context = this;
 	
 	GridView MyGrid;
-	ArrayList<Place> places = new ArrayList<Place>();
+	ArrayList<Place> places;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -97,6 +97,7 @@ public class HomeActivity extends Activity {
 		private ProgressDialog progressDialog;
 		
 		protected void onPreExecute() {
+			places = new ArrayList<Place>();
 			progressDialog = ProgressDialog.show(HomeActivity.this, "",
 					"Fetching data. Please wait...", true);
 		}
