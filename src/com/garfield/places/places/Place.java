@@ -1,6 +1,5 @@
 package com.garfield.places.places;
 
-// TODO: Add website, phone number and open time in backend
 public class Place {
 	private String name;
 	private String content;

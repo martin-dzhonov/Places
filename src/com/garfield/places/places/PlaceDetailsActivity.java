@@ -48,6 +48,7 @@ public class PlaceDetailsActivity extends Activity implements View.OnClickListen
 
 	Context context = this;
 	private String placeId;
+	private boolean hasOnlineReservation;
 	
 	public static final String PLACE_ID = "com.example.myfirstapp.PLACE_ID";
 	public static final String PLACE_NAME_KEY = "PLACE_NAME";
@@ -65,9 +66,13 @@ public class PlaceDetailsActivity extends Activity implements View.OnClickListen
 		Intent intent = getIntent();
 		placeId = intent.getStringExtra(HomeActivity.EXTRA_PLACE_ID);
 		new LoadPlaceDetails().execute(placeId);
-
+		
 		final Button noteReservationButton = (Button)this.findViewById(R.id.Btn_note_reservation);
 		final Button makeReservationOnlineButton = (Button)this.findViewById(R.id.Btn_make_reservation_online);
+		
+		if (!hasOnlineReservation) {
+			makeReservationOnlineButton.setVisibility(View.GONE);
+		}
 		
 		noteReservationButton.setOnClickListener(this);
 		makeReservationOnlineButton.setOnClickListener(this);
@@ -160,14 +165,14 @@ public class PlaceDetailsActivity extends Activity implements View.OnClickListen
 		protected void onPostExecute(JSONObject result) {
 			progressDialog.dismiss();
 			try {
-				// TODO: Visualize new data(website, phone number, open time)
-				// TODO: Hide make reservation online if restaurant does not support such option
 				String name = result.getString("name");
 				String description = result.getString("description");
 				String imageData = result.getString("image");
 				String website = result.getString("website");
 				String phoneNumber = result.getString("phoneNumber");
 				String openFromTo = result.getString("openFromTo");
+				
+				hasOnlineReservation = result.getBoolean("hasOnlineReservation");
 				
 				JSONObject location = result.getJSONObject("location");
 				
