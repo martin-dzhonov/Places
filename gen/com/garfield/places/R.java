@@ -1174,7 +1174,7 @@ containing a value of this type.
         public static final int abc_split_action_bar_is_narrow=0x7f0a0002;
     }
     public static final class color {
-        public static final int abc_search_url_text_holo=0x7f07001b;
+        public static final int abc_search_url_text_holo=0x7f07001c;
         public static final int abc_search_url_text_normal=0x7f070017;
         public static final int abc_search_url_text_pressed=0x7f070019;
         public static final int abc_search_url_text_selected=0x7f070018;
@@ -1191,8 +1191,9 @@ containing a value of this type.
         public static final int common_signin_btn_light_text_disabled=0x7f070006;
         public static final int common_signin_btn_light_text_focused=0x7f070007;
         public static final int common_signin_btn_light_text_pressed=0x7f070005;
-        public static final int common_signin_btn_text_dark=0x7f07001c;
-        public static final int common_signin_btn_text_light=0x7f07001d;
+        public static final int common_signin_btn_text_dark=0x7f07001d;
+        public static final int common_signin_btn_text_light=0x7f07001e;
+        public static final int detailsBgColor=0x7f07001b;
         public static final int wallet_bright_foreground_disabled_holo_light=0x7f07000f;
         /** 
          Wallet colors to support consistent Wallet fragment holo dark UI in client application
@@ -1211,8 +1212,8 @@ containing a value of this type.
         public static final int wallet_hint_foreground_holo_light=0x7f070011;
         public static final int wallet_holo_blue_light=0x7f070015;
         public static final int wallet_link_text_light=0x7f070016;
-        public static final int wallet_primary_text_holo_light=0x7f07001e;
-        public static final int wallet_secondary_text_holo_dark=0x7f07001f;
+        public static final int wallet_primary_text_holo_light=0x7f07001f;
+        public static final int wallet_secondary_text_holo_dark=0x7f070020;
     }
     public static final class dimen {
         /**  Default height of an action bar. 
@@ -1468,35 +1469,44 @@ containing a value of this type.
         public static final int powered_by_google_light=0x7f02007c;
     }
     public static final class id {
-        public static final int Btn_add_place_img=0x7f08006c;
-        public static final int Btn_add_place_photo=0x7f08006d;
-        public static final int Btn_make_reservation_online=0x7f08005f;
-        public static final int Btn_note_reservation=0x7f08005e;
-        public static final int Btn_popup_gallery=0x7f080072;
-        public static final int Btn_popup_photo=0x7f080073;
-        public static final int Btn_save_reservation=0x7f080063;
-        public static final int Btn_suggest_place=0x7f08006e;
-        public static final int ET_add_place_description=0x7f080066;
-        public static final int ET_add_place_name=0x7f080065;
-        public static final int ET_add_place_open_from_to=0x7f08006a;
-        public static final int ET_add_place_phone_number=0x7f080069;
-        public static final int ET_add_place_website=0x7f080068;
-        public static final int ET_reservation_name=0x7f080060;
-        public static final int IV_add_image=0x7f080067;
-        public static final int IV_details_image=0x7f08005c;
-        public static final int IV_home_item=0x7f08006f;
-        public static final int LV_reservations=0x7f080064;
-        public static final int MAP_add_place=0x7f08006b;
-        public static final int MAP_details=0x7f08005d;
-        public static final int NP_reservation=0x7f080062;
-        public static final int TP_reservation=0x7f080061;
-        public static final int TV_details_description=0x7f080058;
+        public static final int Btn_add_place_img=0x7f080073;
+        public static final int Btn_add_place_photo=0x7f080075;
+        public static final int Btn_make_reservation_online=0x7f080062;
+        public static final int Btn_note_reservation=0x7f080063;
+        public static final int Btn_popup_gallery=0x7f08007a;
+        public static final int Btn_popup_photo=0x7f08007b;
+        public static final int Btn_save_reservation=0x7f08006a;
+        public static final int Btn_suggest_place=0x7f080076;
+        public static final int ET_add_place_description=0x7f08006d;
+        public static final int ET_add_place_name=0x7f08006c;
+        public static final int ET_add_place_open_from_to=0x7f080071;
+        public static final int ET_add_place_phone_number=0x7f080070;
+        public static final int ET_add_place_website=0x7f08006f;
+        public static final int ET_reservation_name=0x7f080065;
+        public static final int IV_add_image=0x7f08006e;
+        public static final int IV_details_image=0x7f080058;
+        public static final int IV_home_item=0x7f080077;
+        public static final int LV_reservations=0x7f08006b;
+        public static final int MAP_add_place=0x7f080072;
+        public static final int MAP_details=0x7f080064;
+        public static final int NP_reservation=0x7f080069;
+        public static final int TP_reservation=0x7f080067;
+        public static final int TV_description_label=0x7f08005a;
+        public static final int TV_details_description=0x7f08005b;
         public static final int TV_details_name=0x7f080057;
-        public static final int TV_details_open_time=0x7f08005b;
-        public static final int TV_details_phone_number=0x7f08005a;
-        public static final int TV_details_website=0x7f080059;
-        public static final int TV_home_item_id=0x7f080071;
-        public static final int TV_home_item_name=0x7f080070;
+        public static final int TV_details_open_time=0x7f080061;
+        public static final int TV_details_phone_number=0x7f08005f;
+        public static final int TV_details_website=0x7f08005d;
+        public static final int TV_home_item_id=0x7f080079;
+        public static final int TV_home_item_name=0x7f080078;
+        public static final int TV_number_of_people_pick_label=0x7f080068;
+        public static final int TV_phone_number_label=0x7f08005e;
+        public static final int TV_reservation_date_label=0x7f080080;
+        public static final int TV_reservation_name_label=0x7f08007e;
+        public static final int TV_reservation_number_of_people_label=0x7f080083;
+        public static final int TV_time_pick_label=0x7f080066;
+        public static final int TV_website_label=0x7f08005c;
+        public static final int TV_working_time_label=0x7f080060;
         public static final int action_bar=0x7f08002e;
         public static final int action_bar_activity_content=0x7f080027;
         public static final int action_bar_container=0x7f08002d;
@@ -1508,9 +1518,9 @@ containing a value of this type.
         public static final int action_menu_divider=0x7f080028;
         public static final int action_menu_presenter=0x7f080029;
         public static final int action_mode_close_button=0x7f080036;
-        public static final int action_refresh=0x7f08007a;
-        public static final int action_reservations=0x7f080079;
-        public static final int action_suggest_place=0x7f08007b;
+        public static final int action_refresh=0x7f080085;
+        public static final int action_reservations=0x7f080084;
+        public static final int action_suggest_place=0x7f080086;
         public static final int activity_chooser_view_content=0x7f080037;
         public static final int always=0x7f08001e;
         public static final int beginning=0x7f080023;
@@ -1525,7 +1535,7 @@ containing a value of this type.
         public static final int checkbox=0x7f08003f;
         public static final int classic=0x7f080011;
         public static final int collapseActionView=0x7f080020;
-        public static final int date=0x7f080077;
+        public static final int date=0x7f080082;
         public static final int default_activity_button=0x7f08003a;
         public static final int details_layout=0x7f080056;
         public static final int dialog=0x7f080021;
@@ -1554,14 +1564,14 @@ containing a value of this type.
         public static final int never=0x7f08001c;
         public static final int none=0x7f080000;
         public static final int normal=0x7f080001;
-        public static final int peopleNumber=0x7f080076;
-        public static final int placeName=0x7f080075;
+        public static final int peopleNumber=0x7f080081;
+        public static final int placeName=0x7f08007d;
         public static final int production=0x7f080007;
         public static final int progress_circular=0x7f08002a;
         public static final int progress_horizontal=0x7f08002b;
         public static final int radio=0x7f080041;
-        public static final int reservationName=0x7f080078;
-        public static final int restourantImage=0x7f080074;
+        public static final int reservationName=0x7f08007f;
+        public static final int restourantImage=0x7f08007c;
         public static final int sandbox=0x7f080008;
         public static final int satellite=0x7f080002;
         public static final int search_badge=0x7f080044;
@@ -1579,6 +1589,8 @@ containing a value of this type.
         public static final int showCustom=0x7f08001a;
         public static final int showHome=0x7f080017;
         public static final int showTitle=0x7f080019;
+        public static final int spacer=0x7f080059;
+        public static final int spacerBtn=0x7f080074;
         public static final int split_action_bar=0x7f080030;
         public static final int strict_sandbox=0x7f080009;
         public static final int submit_area=0x7f08004b;
@@ -1855,10 +1867,12 @@ containing a value of this type.
     
  API 14 theme customizations can go here. 
          */
-        public static final int AppBaseTheme=0x7f050093;
+        public static final int AppBaseTheme=0x7f050096;
         /**  Base application theme. 
          */
         public static final int AppTheme=0x7f050090;
+        public static final int BtnStyle=0x7f050095;
+        public static final int DetailsTextStyle=0x7f050094;
         public static final int ListItemTextStyle=0x7f050092;
         /**  Mimic text appearance in select_dialog_item.xml 
          */
@@ -1969,6 +1983,7 @@ containing a value of this type.
          */
         public static final int Theme_Base_Light=0x7f050084;
         public static final int Theme_IAPTheme=0x7f050000;
+        public static final int TitleText=0x7f050093;
         public static final int WalletFragmentDefaultButtonTextAppearance=0x7f050003;
         public static final int WalletFragmentDefaultDetailsHeaderTextAppearance=0x7f050002;
         public static final int WalletFragmentDefaultDetailsTextAppearance=0x7f050001;

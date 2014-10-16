@@ -1,3 +1,4 @@
 <resources>
     <color name="baseColor">#E77E23</color>
+    <color name="detailsBgColor">#2ECC71</color>
 </resources>

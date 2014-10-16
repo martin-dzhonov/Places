@@ -3,7 +3,7 @@
 
     <string name="app_name">Places</string>
     <string name="TV_details_name">Name</string>
-    <string name="TV_details_description">Description</string>
+    <string name="TV_details_description">Description: </string>
     <string name="Btn_make_reservation_online">Make reservation online</string>
     <string name="Btn_note_reservation">Note reservation</string>
     <string name="ET_add_reservation_name">Reservation on</string>
