@@ -1,8 +1,10 @@
-package com.garfield.places;
+package com.garfield.places.places;
 
 import java.util.ArrayList;
 
 import com.garfield.places.R;
+import com.garfield.places.R.id;
+import com.garfield.places.R.layout;
 
 import android.R.integer;
 import android.app.Activity;

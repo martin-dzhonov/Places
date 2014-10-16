@@ -1,4 +1,4 @@
-package com.garfield.places;
+package com.garfield.places.places;
 
 public class Place {
 	private String name;

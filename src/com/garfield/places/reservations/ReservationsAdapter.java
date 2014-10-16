@@ -1,9 +1,13 @@
-package com.garfield.places;
+package com.garfield.places.reservations;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
+
+import com.garfield.places.R;
+import com.garfield.places.R.id;
+import com.garfield.places.R.layout;
 
 import android.app.Service;
 import android.content.Context;

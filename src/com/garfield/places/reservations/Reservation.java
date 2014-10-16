@@ -1,9 +1,6 @@
-package com.garfield.places;
+package com.garfield.places.reservations;
 
 import java.util.Date;
-
-import android.R.string;
-import android.graphics.Bitmap;
 
 import com.orm.SugarRecord;
 

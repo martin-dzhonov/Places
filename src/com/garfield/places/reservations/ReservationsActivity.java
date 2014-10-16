@@ -1,7 +1,11 @@
-package com.garfield.places;
+package com.garfield.places.reservations;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+
+import com.garfield.places.R;
+import com.garfield.places.R.id;
+import com.garfield.places.R.layout;
 
 import android.app.Activity;
 import android.os.Bundle;

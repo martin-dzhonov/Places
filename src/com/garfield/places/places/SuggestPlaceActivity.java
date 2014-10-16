@@ -1,4 +1,4 @@
-package com.garfield.places;
+package com.garfield.places.places;
 
 import java.io.ByteArrayOutputStream;
 
@@ -31,6 +31,10 @@ import android.widget.ImageView;
 import android.widget.NumberPicker;
 import android.widget.Toast;
 
+import com.garfield.places.HomeActivity;
+import com.garfield.places.R;
+import com.garfield.places.R.id;
+import com.garfield.places.R.layout;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;

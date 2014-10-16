@@ -1,39 +1,28 @@
-package com.garfield.places;
+package com.garfield.places.reservations;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.Calendar;
-import java.util.Iterator;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpPut;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONObject;
 
 import com.garfield.places.R;
-import com.orm.SugarApp;
-import com.orm.SugarDb;
+import com.garfield.places.places.PlaceDetailsActivity;
 
-import android.R.integer;
-import android.R.string;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.text.format.DateFormat;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.NumberPicker;
 import android.widget.TimePicker;
 import android.widget.Toast;

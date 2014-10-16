@@ -69,19 +69,19 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.garfield.places.PlaceDetailsActivity"
+            android:name="com.garfield.places.places.PlaceDetailsActivity"
             android:label="@string/details_actionbar_label" >
         </activity>
         <activity
-            android:name="com.garfield.places.SuggestPlaceActivity"
+            android:name="com.garfield.places.places.SuggestPlaceActivity"
             android:label="@string/add_place_actionbar_label" >
         </activity>
         <activity
-            android:name="com.garfield.places.ReservationActivity"
+            android:name="com.garfield.places.reservations.ReservationActivity"
             android:label="@string/reservation_label" >
         </activity>
         <activity
-            android:name="com.garfield.places.ReservationsActivity"
+            android:name="com.garfield.places.reservations.ReservationsActivitytionsActivity"
             android:label="@string/reservations_label" >
         </activity>
         <activity

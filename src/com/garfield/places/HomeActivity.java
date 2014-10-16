@@ -12,6 +12,11 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import com.garfield.places.R;
+import com.garfield.places.places.Place;
+import com.garfield.places.places.PlaceDetailsActivity;
+import com.garfield.places.places.PlacesAdapter;
+import com.garfield.places.places.SuggestPlaceActivity;
+import com.garfield.places.reservations.ReservationsActivity;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
