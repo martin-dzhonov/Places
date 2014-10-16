@@ -136,43 +136,44 @@ public class SuggestPlaceActivity extends Activity implements OnClickListener {
 			}
 		}
 		try {
-			googleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
-			googleMap.setMyLocationEnabled(true);
-			googleMap.getUiSettings().setZoomControlsEnabled(true);
-			googleMap.getUiSettings().setCompassEnabled(true);
-			googleMap.getUiSettings().setZoomGesturesEnabled(true);
-			// LocationManager lm = (LocationManager)
-			// getSystemService(Context.LOCATION_SERVICE);
-			// Location location =
-			// lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+			if (googleMap != null) {
+				googleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+				googleMap.setMyLocationEnabled(true);
+				googleMap.getUiSettings().setZoomControlsEnabled(true);
+				googleMap.getUiSettings().setCompassEnabled(true);
+				googleMap.getUiSettings().setZoomGesturesEnabled(true);
+				// LocationManager lm = (LocationManager)
+				// getSystemService(Context.LOCATION_SERVICE);
+				// Location location =
+				// lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
 
-			MarkerOptions marker = new MarkerOptions().position(
-					new LatLng(currLatitute, currLongitude)).title(
-					"Your location here");
-			marker.icon(BitmapDescriptorFactory
-					.defaultMarker(BitmapDescriptorFactory.HUE_RED));
-			googleMap.addMarker(marker);
+				MarkerOptions marker = new MarkerOptions().position(
+						new LatLng(currLatitute, currLongitude)).title(
+						"Your location here");
+				marker.icon(BitmapDescriptorFactory
+						.defaultMarker(BitmapDescriptorFactory.HUE_RED));
+				googleMap.addMarker(marker);
 
-			CameraPosition cameraPosition = new CameraPosition.Builder()
-					.target(new LatLng(currLatitute, currLongitude)).zoom(14)
-					.build();
+				CameraPosition cameraPosition = new CameraPosition.Builder()
+						.target(new LatLng(currLatitute, currLongitude)).zoom(14)
+						.build();
 
-			googleMap.animateCamera(CameraUpdateFactory
-					.newCameraPosition(cameraPosition));
-			googleMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
+				googleMap.animateCamera(CameraUpdateFactory
+						.newCameraPosition(cameraPosition));
+				googleMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
 
-				@Override
-				public void onMapClick(LatLng point) {
-					googleMap.clear();
-					MarkerOptions marker = new MarkerOptions().position(
-							new LatLng(point.latitude, point.longitude)).title(
-							"New Marker");
-					currLatitute = (double) (point.latitude);
-					currLongitude = (double) (point.longitude);
-					googleMap.addMarker(marker);
-				}
-			});
-
+					@Override
+					public void onMapClick(LatLng point) {
+						googleMap.clear();
+						MarkerOptions marker = new MarkerOptions().position(
+								new LatLng(point.latitude, point.longitude)).title(
+								"New Marker");
+						currLatitute = (double) (point.latitude);
+						currLongitude = (double) (point.longitude);
+						googleMap.addMarker(marker);
+					}
+				});
+			}
 		} catch (Exception e) {
 			// TODO: handle exception
 		}

@@ -47,7 +47,6 @@ public class HomeActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_home);
-		SugarApp.getSugarContext().deleteDatabase("places.db");
 		MyGrid = (GridView) findViewById(R.id.gridView1);
 		
 		new PopulatePlacesTask().execute();
@@ -134,7 +133,7 @@ public class HomeActivity extends Activity {
 		@Override
 		protected void onPostExecute(ArrayList<Place> result) {
 			progressDialog.dismiss();
-			MyGrid.setAdapter(new PlacesAdapter(HomeActivity.this, places));
+			MyGrid.setAdapter(new PlacesAdapter(HomeActivity.this.getApplicationContext(), places));
 		}
 	}
 }

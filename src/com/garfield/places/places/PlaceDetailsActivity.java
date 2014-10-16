@@ -32,6 +32,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Base64;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -45,6 +46,9 @@ public class PlaceDetailsActivity extends Activity implements View.OnClickListen
 	private TextView websiteTextView;
 	private TextView phoneNubmerTextView;
 	private TextView openTimeTextView;
+	
+	private Button noteReservationButton;
+	private Button makeReservationOnlineButton;
 
 	Context context = this;
 	private String placeId;
@@ -65,14 +69,11 @@ public class PlaceDetailsActivity extends Activity implements View.OnClickListen
 
 		Intent intent = getIntent();
 		placeId = intent.getStringExtra(HomeActivity.EXTRA_PLACE_ID);
+		
+		noteReservationButton = (Button)this.findViewById(R.id.Btn_note_reservation);
+		makeReservationOnlineButton = (Button)this.findViewById(R.id.Btn_make_reservation_online);
+		
 		new LoadPlaceDetails().execute(placeId);
-		
-		final Button noteReservationButton = (Button)this.findViewById(R.id.Btn_note_reservation);
-		final Button makeReservationOnlineButton = (Button)this.findViewById(R.id.Btn_make_reservation_online);
-		
-		if (!hasOnlineReservation) {
-			makeReservationOnlineButton.setVisibility(View.GONE);
-		}
 		
 		noteReservationButton.setOnClickListener(this);
 		makeReservationOnlineButton.setOnClickListener(this);
@@ -173,6 +174,12 @@ public class PlaceDetailsActivity extends Activity implements View.OnClickListen
 				String openFromTo = result.getString("openFromTo");
 				
 				hasOnlineReservation = result.getBoolean("hasOnlineReservation");
+				Log.d("has", String.valueOf(hasOnlineReservation));
+				if (!hasOnlineReservation) {
+					makeReservationOnlineButton.setVisibility(View.GONE);
+				}
+				
+				Log.d("res", String.valueOf(hasOnlineReservation));
 				
 				JSONObject location = result.getJSONObject("location");
 				
@@ -191,20 +198,22 @@ public class PlaceDetailsActivity extends Activity implements View.OnClickListen
 				imageView.setImageBitmap(BitmapFactory.decodeByteArray(
 						imageAsBytes, 0, imageAsBytes.length));
 				
-				MarkerOptions marker = new MarkerOptions().position(
-						new LatLng(latitude, longitude))
-						.title("Your location here");
-						
-				marker.icon(BitmapDescriptorFactory
-						.defaultMarker(BitmapDescriptorFactory.HUE_RED));
-				
-				googleMap.addMarker(marker);
-				CameraPosition cameraPosition = new CameraPosition.Builder()
-						.target(new LatLng(latitude, longitude)).zoom(14)
-						.build();
+				if (googleMap != null) {
+					MarkerOptions marker = new MarkerOptions().position(
+							new LatLng(latitude, longitude))
+							.title("Your location here");
+							
+					marker.icon(BitmapDescriptorFactory
+							.defaultMarker(BitmapDescriptorFactory.HUE_RED));
+					
+					googleMap.addMarker(marker);
+					CameraPosition cameraPosition = new CameraPosition.Builder()
+							.target(new LatLng(latitude, longitude)).zoom(14)
+							.build();
 
-				googleMap.animateCamera(CameraUpdateFactory
-						.newCameraPosition(cameraPosition));
+					googleMap.animateCamera(CameraUpdateFactory
+							.newCameraPosition(cameraPosition));
+				}
 			} catch (JSONException e) {
 				e.printStackTrace();
 			}

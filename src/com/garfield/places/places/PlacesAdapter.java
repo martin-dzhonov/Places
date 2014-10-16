@@ -4,8 +4,8 @@ import java.util.ArrayList;
 
 import com.garfield.places.R;
 
-import android.app.Activity;
 import android.app.Service;
+import android.content.Context;
 import android.graphics.BitmapFactory;
 import android.util.Base64;
 import android.view.LayoutInflater;
@@ -17,9 +17,9 @@ import android.widget.TextView;
 
 public class PlacesAdapter extends ArrayAdapter<Place> {
 	private ArrayList<Place> places;
-	private final Activity context;
+	private Context context;
 
-	public PlacesAdapter(Activity context, ArrayList<Place> places) {
+	public PlacesAdapter(Context context, ArrayList<Place> places) {
 		super(context, R.layout.list_single_item, places);
 		this.places = places;
 		this.context = context;
@@ -33,6 +33,28 @@ public class PlacesAdapter extends ArrayAdapter<Place> {
 	
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
+//		LayoutInflater inflater = (LayoutInflater) context
+//			.getSystemService(Service.LAYOUT_INFLATER_SERVICE);
+//		View view = inflater.inflate(R.layout.list_single_item, parent, false);
+//		
+//		TextView nameTextView = (TextView) view.findViewById(R.id.TV_home_item_name);			
+//		TextView idTextView = (TextView) view.findViewById(R.id.TV_home_item_id);		
+//		ImageView imageView = (ImageView) view.findViewById(R.id.IV_home_item);
+//		
+//		Place place = places.get(position);
+//		
+//		nameTextView.setText(place.getName());
+//		
+//		byte[] imageAsBytes = Base64.decode(place
+//				.getImageBase64().getBytes(), Base64.DEFAULT);
+//
+//		imageView.setImageBitmap(BitmapFactory.decodeByteArray(
+//				imageAsBytes, 0, imageAsBytes.length));
+//		
+//		idTextView.setText(place.getId());
+//		
+//		return view;
+		
 		ViewHolder holder;
 		
 		if (convertView == null) {
