@@ -10,11 +10,10 @@ public class Place {
 	private String openFromTo;
 	private String phoneNumber;
 	
-	public Place(String name, String id, String imageData, boolean hasOnlineReservation){
+	public Place(String name, String id, String imageData){
 		this.name = name;
 		this.id = id;
 		this.imageData = imageData;
-		this.hasOnlineReservation = hasOnlineReservation;
 	}
 
 	public String getContent() {

@@ -12,7 +12,7 @@
 
     <style name="ListItemTextStyle">
         <item name="android:textColor">@color/baseColor</item>
-        <item name="android:textSize">12sp</item>
+        <item name="android:textSize">15sp</item>
         <item name="android:textStyle">italic</item>
     </style>
 
