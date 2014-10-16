@@ -3,12 +3,9 @@ package com.garfield.places.places;
 import java.util.ArrayList;
 
 import com.garfield.places.R;
-import com.garfield.places.R.id;
-import com.garfield.places.R.layout;
 
-import android.R.integer;
 import android.app.Activity;
-import android.content.Context;
+import android.app.Service;
 import android.graphics.BitmapFactory;
 import android.util.Base64;
 import android.view.LayoutInflater;
@@ -33,22 +30,52 @@ public class PlacesAdapter extends ArrayAdapter<Place> {
     {
        return places.size();
     }
+	
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
-		LayoutInflater inflater = context.getLayoutInflater();
-		View rowView = inflater.inflate(R.layout.list_single_item, null);
-		TextView nameTextView = (TextView) rowView
-				.findViewById(R.id.TV_home_item_name);
-		nameTextView.setText(places.get(position).getName());
-		ImageView imageView = (ImageView) rowView
-				.findViewById(R.id.IV_home_item);
-		byte[] imageAsBytes = Base64.decode(places.get(position)
-				.getImageBase64().getBytes(), Base64.DEFAULT);
-		imageView.setImageBitmap(BitmapFactory.decodeByteArray(imageAsBytes, 0,
-				imageAsBytes.length));
-		TextView idTextView = (TextView) rowView
-				.findViewById(R.id.TV_home_item_id);
-		idTextView.setText(places.get(position).getId());
-		return rowView;
+		ViewHolder holder;
+		
+		if (convertView == null) {
+			LayoutInflater inflater = (LayoutInflater) context
+					.getSystemService(Service.LAYOUT_INFLATER_SERVICE);
+			convertView = inflater.inflate(R.layout.list_single_item, parent,
+					false);
+
+			holder = new ViewHolder();
+			
+			holder.nameTextView = (TextView) convertView
+					.findViewById(R.id.placeName);
+			
+			holder.idTextView = (TextView) convertView.findViewById(R.id.date);
+			
+			holder.imageView = (ImageView) convertView
+					.findViewById(R.id.restourantImage);
+
+			convertView.setTag(holder);
+		} else {
+			holder = (ViewHolder) convertView.getTag();
+		}
+
+		Place place = places.get(position);
+
+		if (place != null) {
+			holder.nameTextView.setText(place.getName());
+			
+			byte[] imageAsBytes = Base64.decode(place
+					.getImageBase64().getBytes(), Base64.DEFAULT);
+
+			holder.imageView.setImageBitmap(BitmapFactory.decodeByteArray(
+					imageAsBytes, 0, imageAsBytes.length));
+			
+			holder.idTextView.setText(place.getId());
+		}
+
+		return convertView;
+	}
+	
+	private class ViewHolder {
+		public TextView nameTextView;
+		public TextView idTextView;
+		public ImageView imageView;
 	}
 }

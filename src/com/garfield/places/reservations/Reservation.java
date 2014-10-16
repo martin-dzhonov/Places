@@ -13,12 +13,16 @@ public class Reservation extends SugarRecord<Reservation> {
 	private String placeName;
 	private String description;
 	private String image;
+	private String placeWebsite;
+	private String openFromTo;
+	private String placePhoneNumber;
 	
 	public Reservation() {
 	}
 	
 	public Reservation(String name, Date date, int numberOfPeople, String placeId, 
-			String placeName, String description, String image) {
+			String placeName, String description, String image, String placeWebsite, 
+			String openFromTo, String placePhoneNumber) {
 		this.setName(name);
 		this.setDate(date);
 		this.setNumberOfPeople(numberOfPeople);
@@ -26,6 +30,9 @@ public class Reservation extends SugarRecord<Reservation> {
 		this.setPlaceName(placeName);
 		this.setDescription(description);
 		this.setImage(image);
+		this.setPlaceWebsite(placeWebsite);
+		this.setOpenFromTo(openFromTo);
+		this.setPlacePhoneNumber(placePhoneNumber);
 	}
 
 	public String getName() {
@@ -82,5 +89,29 @@ public class Reservation extends SugarRecord<Reservation> {
 
 	public void setImage(String image) {
 		this.image = image;
+	}
+
+	public String getPlaceWebsite() {
+		return placeWebsite;
+	}
+
+	public void setPlaceWebsite(String placeWebsite) {
+		this.placeWebsite = placeWebsite;
+	}
+
+	public String getOpenFromTo() {
+		return openFromTo;
+	}
+
+	public void setOpenFromTo(String openFromTo) {
+		this.openFromTo = openFromTo;
+	}
+
+	public String getPlacePhoneNumber() {
+		return placePhoneNumber;
+	}
+
+	public void setPlacePhoneNumber(String placePhoneNumber) {
+		this.placePhoneNumber = placePhoneNumber;
 	}
 }

@@ -3,7 +3,8 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:gravity="center_horizontal"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    android:padding="5dp" >
 
     <ImageView
         android:id="@+id/IV_home_item"
@@ -13,12 +14,13 @@
     <TextView
         android:id="@+id/TV_home_item_name"
         android:layout_width="wrap_content"
-        android:layout_height="50dp" />
+        android:layout_height="wrap_content"
+        style="@style/ListItemTextStyle" />
 
     <TextView
         android:id="@+id/TV_home_item_id"
         android:layout_width="wrap_content"
         android:layout_height="50dp"
         android:visibility="gone" />
-
+    
 </LinearLayout>

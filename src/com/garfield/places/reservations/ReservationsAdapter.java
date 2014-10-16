@@ -44,11 +44,15 @@ public class ReservationsAdapter extends ArrayAdapter<Reservation> {
 			holder = new ViewHolder();
 			holder.placeNameView = (TextView) convertView
 					.findViewById(R.id.placeName);
+			
 			holder.dateView = (TextView) convertView.findViewById(R.id.date);
+			
 			holder.peopleNumberView = (TextView) convertView
 					.findViewById(R.id.peopleNumber);
+			
 			holder.reservationNameView = (TextView) convertView
 					.findViewById(R.id.reservationName);
+			
 			holder.imageView = (ImageView) convertView
 					.findViewById(R.id.restourantImage);
 

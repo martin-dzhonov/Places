@@ -31,10 +31,8 @@ import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v4.widget.SimpleCursorAdapter.ViewBinder;
 import android.util.Base64;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -44,14 +42,20 @@ public class PlaceDetailsActivity extends Activity implements View.OnClickListen
 	private TextView nameTextView;
 	private TextView descriptionTextView;
 	private ImageView imageView;
+	private TextView websiteTextView;
+	private TextView phoneNubmerTextView;
+	private TextView openTimeTextView;
 
 	Context context = this;
 	private String placeId;
 	
-	public final static String PLACE_ID = "com.example.myfirstapp.PLACE_ID";
-	public final static String PLACE_NAME_KEY = "PLACE_NAME";
-	public final static String DESCRIPTION_KEY = "DESCRIPTION";
-	public final static String IMAGE_KEY = "IMAGE";
+	public static final String PLACE_ID = "com.example.myfirstapp.PLACE_ID";
+	public static final String PLACE_NAME_KEY = "PLACE_NAME";
+	public static final String DESCRIPTION_KEY = "DESCRIPTION";
+	public static final String IMAGE_KEY = "IMAGE";
+	public static final String PLACE_WEBSITE_KEY = "WEBSITE";
+	public static final String PLACE_PHONE_NUMBER_KEY = "PHONE_NUMBER";
+	public static final String PLACE_OPEN_TIME_KEY = "OPEN_TIME";
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {	
@@ -79,6 +83,9 @@ public class PlaceDetailsActivity extends Activity implements View.OnClickListen
 			info.putString(PLACE_NAME_KEY, nameTextView.getText().toString());
 			info.putString(DESCRIPTION_KEY, descriptionTextView.getText().toString());
 			info.putString(IMAGE_KEY, encodeTobase64(((BitmapDrawable)imageView.getDrawable()).getBitmap()));
+			info.putString(PLACE_WEBSITE_KEY, websiteTextView.getText().toString());
+			info.putString(PLACE_PHONE_NUMBER_KEY, phoneNubmerTextView.getText().toString());
+			info.putString(PLACE_OPEN_TIME_KEY, openTimeTextView.getText().toString());
 			
 			reserveIntent.putExtras(info);
 			startActivity(reserveIntent);
@@ -106,9 +113,13 @@ public class PlaceDetailsActivity extends Activity implements View.OnClickListen
 		protected void onPreExecute() {
 			progressDialog = ProgressDialog.show(PlaceDetailsActivity.this, "",
 					"Loading. Please wait...", true);
+			
 			nameTextView = (TextView) findViewById(R.id.TV_details_name);
 			descriptionTextView = (TextView) findViewById(R.id.TV_details_description);
 			imageView = (ImageView) findViewById(R.id.IV_details_image);
+			websiteTextView = (TextView) findViewById(R.id.TV_details_website);
+			phoneNubmerTextView = (TextView) findViewById(R.id.TV_details_phone_number);
+			openTimeTextView = (TextView) findViewById(R.id.TV_details_open_time);
 
 			if (googleMap == null) {
 				googleMap = ((MapFragment) getFragmentManager()
@@ -154,20 +165,34 @@ public class PlaceDetailsActivity extends Activity implements View.OnClickListen
 				String name = result.getString("name");
 				String description = result.getString("description");
 				String imageData = result.getString("image");
+				String website = result.getString("website");
+				String phoneNumber = result.getString("phoneNumber");
+				String openFromTo = result.getString("openFromTo");
+				
 				JSONObject location = result.getJSONObject("location");
+				
 				double longitude = location.getDouble("longitude");
 				double latitude = location.getDouble("latitude");
+				
 				nameTextView.setText(name);
 				descriptionTextView.setText(description);
+				websiteTextView.setText(website);
+			    phoneNubmerTextView.setText(phoneNumber);
+			    openTimeTextView.setText(openFromTo);
+				
 				byte[] imageAsBytes = Base64.decode(imageData.getBytes(),
 						Base64.DEFAULT);
+				
 				imageView.setImageBitmap(BitmapFactory.decodeByteArray(
 						imageAsBytes, 0, imageAsBytes.length));
+				
 				MarkerOptions marker = new MarkerOptions().position(
 						new LatLng(latitude, longitude))
 						.title("Your location here");
+						
 				marker.icon(BitmapDescriptorFactory
 						.defaultMarker(BitmapDescriptorFactory.HUE_RED));
+				
 				googleMap.addMarker(marker);
 				CameraPosition cameraPosition = new CameraPosition.Builder()
 						.target(new LatLng(latitude, longitude)).zoom(14)

@@ -27,4 +27,7 @@
     <string name="reservation_label">Reservation</string>
 	<string name="refresh">Refresh</string>
 	<string name="suggest">Suggest</string>
+	<string name="ET_add_place_website">www.example.com</string>
+	<string name="ET_add_place_phone_number">Phone Number</string>
+	<string name="ET_add_place_open_from_to">Open time, example: 08:00-22:30</string>
 </resources>

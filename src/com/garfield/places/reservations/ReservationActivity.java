@@ -77,9 +77,12 @@ public class ReservationActivity extends Activity {
 		String placeName = info.getString(PlaceDetailsActivity.PLACE_NAME_KEY);
 		String description = info.getString(PlaceDetailsActivity.DESCRIPTION_KEY);
 		String image = info.getString(PlaceDetailsActivity.IMAGE_KEY);
+		String placeWebsite = info.getString(PlaceDetailsActivity.PLACE_WEBSITE_KEY);
+		String placePhoneNubmer = info.getString(PlaceDetailsActivity.PLACE_PHONE_NUMBER_KEY);
+		String placeOpenTime = info.getString(PlaceDetailsActivity.PLACE_OPEN_TIME_KEY);
 		
 		Reservation reservation = new Reservation(reservationName, cal.getTime(), numberOfPeople, placeId, 
-				placeName, description, image);	
+				placeName, description, image, placeWebsite, placePhoneNubmer, placeOpenTime);	
 		
 		reservation.save();
 		

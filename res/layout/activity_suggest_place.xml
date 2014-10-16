@@ -26,6 +26,31 @@
             android:layout_height="wrap_content" >
         </ImageView>
 
+        <EditText
+            android:id="@+id/ET_add_place_website"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/ET_add_place_website" >
+        </EditText>
+
+        <EditText
+            android:id="@+id/ET_add_place_phone_number"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="phone"
+            android:hint="@string/ET_add_place_phone_number" >
+        </EditText>
+
+        <EditText
+            android:id="@+id/ET_add_place_open_from_to"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/ET_add_place_open_from_to" >
+        </EditText>
+
         <fragment
             android:id="@+id/MAP_add_place"
             android:name="com.google.android.gms.maps.MapFragment"
@@ -34,16 +59,15 @@
 
         <Button
             android:id="@+id/Btn_add_place_img"
-            android:layout_width="fill_parent"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/Btn_add_place_img" />
 
         <Button
             android:id="@+id/Btn_add_place_photo"
-            android:layout_width="fill_parent"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Take photo" />
-        
 
         <Button
             android:id="@+id/Btn_suggest_place"

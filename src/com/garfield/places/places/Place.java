@@ -7,7 +7,9 @@ public class Place {
 	private String id;
 	private String imageData;
 	private boolean hasOnlineReservation;
-
+	private String website;
+	private String openFromTo;
+	private String phoneNumber;
 	
 	public Place(String name, String id, String imageData, boolean hasOnlineReservation){
 		this.name = name;
@@ -46,5 +48,29 @@ public class Place {
 
 	public void setHasOnlineReservation(boolean hasOnlineReservation) {
 		this.hasOnlineReservation = hasOnlineReservation;
+	}
+
+	public String getWebsite() {
+		return website;
+	}
+
+	public void setWebsite(String website) {
+		this.website = website;
+	}
+
+	public String getOpenFromTo() {
+		return openFromTo;
+	}
+
+	public void setOpenFromTo(String openFromTo) {
+		this.openFromTo = openFromTo;
+	}
+
+	public String getPhoneNumber() {
+		return phoneNumber;
+	}
+
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
 	}
 }
