@@ -103,8 +103,10 @@ public class HomeActivity extends Activity {
 		}
 
 		@Override
-		protected ArrayList<Place> doInBackground(Void... arg0) {			
+		protected ArrayList<Place> doInBackground(Void... arg0) {
+			
 			try {
+
 				HttpClient hc = new DefaultHttpClient();
 				HttpGet get = new HttpGet(
 						"https://api.everlive.com/v1/BPHTkWwyt41jYxjq/Places");
@@ -120,7 +122,7 @@ public class HomeActivity extends Activity {
 						String id = placeJson.getString("Id");
 						String name = placeJson.getString("name");
 						String imageData = placeJson.getString("image");
-						Place place = new Place(name, id, imageData);
+						Place place = new Place(name, id, imageData, false);
 						places.add(place);
 					}
 				}

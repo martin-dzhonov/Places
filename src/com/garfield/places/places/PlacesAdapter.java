@@ -43,9 +43,13 @@ public class PlacesAdapter extends ArrayAdapter<Place> {
 
 			holder = new ViewHolder();
 			
-			holder.nameTextView = (TextView) convertView.findViewById(R.id.TV_home_item_name);			
-			holder.idTextView = (TextView) convertView.findViewById(R.id.TV_home_item_id);		
-			holder.imageView = (ImageView) convertView.findViewById(R.id.IV_home_item);
+			holder.nameTextView = (TextView) convertView
+					.findViewById(R.id.placeName);
+			
+			holder.idTextView = (TextView) convertView.findViewById(R.id.date);
+			
+			holder.imageView = (ImageView) convertView
+					.findViewById(R.id.restourantImage);
 
 			convertView.setTag(holder);
 		} else {

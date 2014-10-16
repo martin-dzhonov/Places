@@ -4,6 +4,7 @@ import java.util.Date;
 
 import com.orm.SugarRecord;
 
+// TODO: Add new data from Place
 public class Reservation extends SugarRecord<Reservation> {
 	private Date date;
 	private int numberOfPeople;
