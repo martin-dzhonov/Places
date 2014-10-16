@@ -17,6 +17,7 @@ import com.garfield.places.places.PlaceDetailsActivity;
 import com.garfield.places.places.PlacesAdapter;
 import com.garfield.places.places.SuggestPlaceActivity;
 import com.garfield.places.reservations.ReservationsActivity;
+import com.orm.SugarApp;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -46,7 +47,6 @@ public class HomeActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_home);
-		
 		MyGrid = (GridView) findViewById(R.id.gridView1);
 		
 		new PopulatePlacesTask().execute();
@@ -121,7 +121,7 @@ public class HomeActivity extends Activity {
 						String id = placeJson.getString("Id");
 						String name = placeJson.getString("name");
 						String imageData = placeJson.getString("image");
-						Place place = new Place(name, id, imageData);
+						Place place = new Place(name, id, imageData, false);
 						places.add(place);
 					}
 				}

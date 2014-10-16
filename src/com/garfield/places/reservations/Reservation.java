@@ -4,13 +4,13 @@ import java.util.Date;
 
 import com.orm.SugarRecord;
 
+// TODO: Add new data from Place
 public class Reservation extends SugarRecord<Reservation> {
 	private Date date;
 	private int numberOfPeople;
 	private String name;
 	private String placeId;
 	private String placeName;
-	private String capacity;
 	private String description;
 	private String image;
 	
@@ -18,14 +18,13 @@ public class Reservation extends SugarRecord<Reservation> {
 	}
 	
 	public Reservation(String name, Date date, int numberOfPeople, String placeId, 
-			String placeName, String capacity, String description, String image) {
+			String placeName, String description, String image) {
 		this.setName(name);
 		this.setDate(date);
 		this.setNumberOfPeople(numberOfPeople);
 		this.setPlaceId(placeId);
 		this.setPlaceName(placeName);
 		this.setDescription(description);
-		this.setCapacity(capacity);
 		this.setImage(image);
 	}
 
@@ -67,14 +66,6 @@ public class Reservation extends SugarRecord<Reservation> {
 
 	public void setPlaceName(String placeName) {
 		this.placeName = placeName;
-	}
-
-	public String getCapacity() {
-		return capacity;
-	}
-
-	public void setCapacity(String capacity) {
-		this.capacity = capacity;
 	}
 
 	public String getDescription() {

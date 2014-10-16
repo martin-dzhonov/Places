@@ -81,7 +81,7 @@
             android:label="@string/reservation_label" >
         </activity>
         <activity
-            android:name="com.garfield.places.reservations.ReservationsActivitytionsActivity"
+            android:name="com.garfield.places.reservations.ReservationsActivity"
             android:label="@string/reservations_label" >
         </activity>
         <activity

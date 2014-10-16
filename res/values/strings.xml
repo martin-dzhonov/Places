@@ -2,11 +2,11 @@
 <resources>
 
     <string name="app_name">Places</string>
-    <string name="action_settings">Settings</string>
     <string name="TV_details_name">Name</string>
     <string name="TV_details_description">Description</string>
-    <string name="Btn_make_reservation">Make reservation</string>
-    <string name="ET_add_place_name">Name</string>
+    <string name="Btn_make_reservation_online">Make reservation online</string>
+    <string name="Btn_note_reservation">Note reservation</string>
+    <string name="ET_add_reservation_name">Reservation on</string>
     <string name="ET_add_place_desription">Description</string>
     <string name="Btn_suggest_place">Suggest it</string>
     <string name="add_place_actionbar_label">Add new</string>
@@ -22,8 +22,9 @@
     <string name="Btn_choose_account_customer">Customer</string>
     <string name="Btn_add_place_img">Add image</string>
     <string name="Btn_add_place_geo">Add location</string>
-    <string name="Btn_save_reservation">Go</string>
+    <string name="Btn_save_reservation">Save</string>
     <string name="reservations_label">Reservations</string>
     <string name="reservation_label">Reservation</string>
-
+	<string name="refresh">Refresh</string>
+	<string name="suggest">Suggest</string>
 </resources>

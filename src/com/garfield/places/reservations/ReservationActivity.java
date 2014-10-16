@@ -32,6 +32,10 @@ public class ReservationActivity extends Activity {
 	private String placeId;
 	private Bundle info;
 	
+	private EditText namEditText;
+	private TimePicker timePicker;
+	private NumberPicker numberPicker;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -46,98 +50,43 @@ public class ReservationActivity extends Activity {
 		final Button placeButton = (Button) findViewById(R.id.Btn_save_reservation);
 		placeButton.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
-				new EverlivePut().execute(placeId);
+				saveReservationToSql();
+				
 				Intent intent = new Intent(context, ReservationsActivity.class);
 				startActivity(intent);
 			}
 		});
 	}
 	
-	private void saveReservationToSql(String name, Date date, int numberOfPeople, String placeId, 
-			String placeName, String capacity, String description, String image) {
-		Reservation reservation = new Reservation(name, date, numberOfPeople, placeId, 
-				placeName, capacity, description, image);
+	private void saveReservationToSql() {
+		ProgressDialog progressDialog = ProgressDialog.show(ReservationActivity.this, "",
+				"Saving. Please wait...", true);
+		
+		namEditText = (EditText) findViewById(R.id.ET_reservation_name);
+		timePicker = (TimePicker) findViewById(R.id.TP_reservation);
+		numberPicker = (NumberPicker) findViewById(R.id.NP_reservation);
+		
+		String reservationName = namEditText.getText().toString();
+		
+		Calendar cal = Calendar.getInstance();
+		cal.set(Calendar.HOUR, timePicker.getCurrentHour());
+		cal.set(Calendar.MINUTE, timePicker.getCurrentMinute());
+		
+		int numberOfPeople = numberPicker.getValue();
+		
+		String placeName = info.getString(PlaceDetailsActivity.PLACE_NAME_KEY);
+		String description = info.getString(PlaceDetailsActivity.DESCRIPTION_KEY);
+		String image = info.getString(PlaceDetailsActivity.IMAGE_KEY);
+		
+		Reservation reservation = new Reservation(reservationName, cal.getTime(), numberOfPeople, placeId, 
+				placeName, description, image);	
 		
 		reservation.save();
+		
+		progressDialog.dismiss();
+		Toast.makeText(context, "Reservation saved.", Toast.LENGTH_SHORT).show();
 	}
 	
-	private class EverlivePut extends AsyncTask<String, Void, Void> {
-		private ProgressDialog progressDialog;
-		private EditText namEditText;
-		private TimePicker timePicker;
-		private NumberPicker numberPicker;
-
-		protected void onPreExecute() {
-			namEditText = (EditText) findViewById(R.id.ET_reservation_name);
-			timePicker = (TimePicker) findViewById(R.id.TP_reservation);
-			numberPicker = (NumberPicker) findViewById(R.id.NP_reservation);
-			progressDialog = ProgressDialog.show(ReservationActivity.this, "",
-					"Saving. Please wait...", true);
-			
-			String name = namEditText.getText().toString();
-			
-			Calendar cal = Calendar.getInstance();
-			cal.set(Calendar.HOUR, timePicker.getCurrentHour());
-			cal.set(Calendar.MINUTE, timePicker.getCurrentMinute());
-			
-			int numberOfPeople = numberPicker.getValue();
-			
-			String placeName = info.getString(PlaceDetailsActivity.PLACE_NAME_KEY);
-			String capacity = info.getString(PlaceDetailsActivity.CAPACITY_KEY);
-			String description = info.getString(PlaceDetailsActivity.DESCRIPTION_KEY);
-			String image = info.getString(PlaceDetailsActivity.IMAGE_KEY);
-			
-			saveReservationToSql(name, cal.getTime(), numberOfPeople, placeId, 
-					placeName, capacity, description, image);
-		}
-
-		@Override
-		protected Void doInBackground(String... placeId) {
-			try {
-				
-				JSONObject obj = new JSONObject();
-				//obj.put("Name", namEditText.getText().toString());
-				//obj.put("People", numberPicker.getValue());
-				//obj.put("PlaceId", placeId[0]);
-				//String time = timePicker.getCurrentHour() + ":" +timePicker.getCurrentMinute();
-				//obj.put("Time", time);
-				
-				obj.put("capacity", numberPicker.getValue());
-				
-				HttpClient httpclient = new DefaultHttpClient();
-
-				String path = "https://api.everlive.com/v1/BPHTkWwyt41jYxjq/Places/" + placeId[0];
-				// url with the post data
-				HttpPut httpPut = new HttpPut(path);
-
-				// passes the results to a string builder/entity
-				StringEntity se = new StringEntity(obj.toString());
-
-				// sets the post request as the resulting string
-				httpPut.setEntity(se);
-				// sets a request header so the page receving the request
-				// will know what to do with it
-
-				// 7. Set some headers to inform server about the type of the
-				// content
-			
-
-				// 8. Execute POST request to the given URL
-				HttpResponse httpResponse = httpclient.execute(httpPut);
-
-			} catch (Exception e) {
-				Toast.makeText(context, "Error connecting  to database",
-						Toast.LENGTH_LONG).show();
-			}
-			return null;
-		}
-
-		@Override
-		protected void onPostExecute(Void result) {
-			progressDialog.dismiss();
-			Toast.makeText(context, "Success.", Toast.LENGTH_SHORT).show();
-		}
-	}
 	private void initNumberPicker() {
 		NumberPicker np = (NumberPicker) findViewById(R.id.NP_reservation);
 		np.setMaxValue(50);

@@ -13,8 +13,6 @@ import org.json.JSONObject;
 
 import com.garfield.places.HomeActivity;
 import com.garfield.places.R;
-import com.garfield.places.R.id;
-import com.garfield.places.R.layout;
 import com.garfield.places.reservations.ReservationActivity;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -31,11 +29,10 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
-import android.opengl.Visibility;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.widget.SimpleCursorAdapter.ViewBinder;
 import android.util.Base64;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -43,43 +40,55 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class PlaceDetailsActivity extends Activity  {
+public class PlaceDetailsActivity extends Activity implements View.OnClickListener {
 	private TextView nameTextView;
 	private TextView descriptionTextView;
-	private TextView capacityTextView;
 	private ImageView imageView;
 
 	Context context = this;
+	private String placeId;
+	
 	public final static String PLACE_ID = "com.example.myfirstapp.PLACE_ID";
 	public final static String PLACE_NAME_KEY = "PLACE_NAME";
-	public final static String CAPACITY_KEY = "CAPACITY";
 	public final static String DESCRIPTION_KEY = "DESCRIPTION";
 	public final static String IMAGE_KEY = "IMAGE";
+	
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
+	protected void onCreate(Bundle savedInstanceState) {	
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_place_details);
 
 		Intent intent = getIntent();
-		final String placeId = intent.getStringExtra(HomeActivity.EXTRA_PLACE_ID);
+		placeId = intent.getStringExtra(HomeActivity.EXTRA_PLACE_ID);
 		new LoadPlaceDetails().execute(placeId);
 
-		final Button button = (Button) findViewById(R.id.Btn_make_reservation);
-		button.setOnClickListener(new OnClickListener() {
-			public void onClick(View v) {			
-				Intent reserveIntent = new Intent(context, ReservationActivity.class);
-				Bundle info = new Bundle();
-				info.putString(PLACE_ID, placeId);
-				info.putString(PLACE_NAME_KEY, nameTextView.getText().toString());
-				info.putString(CAPACITY_KEY, capacityTextView.getText().toString());
-				info.putString(DESCRIPTION_KEY, descriptionTextView.getText().toString());
-				info.putString(IMAGE_KEY, encodeTobase64(((BitmapDrawable)imageView.getDrawable()).getBitmap()));
-				
-				reserveIntent.putExtras(info);
-				startActivity(reserveIntent);
-			}
-		});
+		final Button noteReservationButton = (Button)this.findViewById(R.id.Btn_note_reservation);
+		final Button makeReservationOnlineButton = (Button)this.findViewById(R.id.Btn_make_reservation_online);
+		
+		noteReservationButton.setOnClickListener(this);
+		makeReservationOnlineButton.setOnClickListener(this);
 	}
+	
+	@Override
+	public void onClick(View v) {
+		if (v.getId() == R.id.Btn_note_reservation) {
+			Intent reserveIntent = new Intent(context, ReservationActivity.class);
+			Bundle info = new Bundle();
+			
+			info.putString(PLACE_ID, placeId);
+			info.putString(PLACE_NAME_KEY, nameTextView.getText().toString());
+			info.putString(DESCRIPTION_KEY, descriptionTextView.getText().toString());
+			info.putString(IMAGE_KEY, encodeTobase64(((BitmapDrawable)imageView.getDrawable()).getBitmap()));
+			
+			reserveIntent.putExtras(info);
+			startActivity(reserveIntent);
+		}
+		
+		if (v.getId() == R.id.Btn_make_reservation_online) {
+			// TODO: Open restourant website, to make reservation
+		}
+	}
+	
 	private static String encodeTobase64(Bitmap image) {
 		Bitmap immagex = image;
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -89,6 +98,7 @@ public class PlaceDetailsActivity extends Activity  {
 
 		return imageEncoded;
 	}
+	
 	private class LoadPlaceDetails extends AsyncTask<String, Void, JSONObject> {
 		private ProgressDialog progressDialog;
 		private GoogleMap googleMap;
@@ -98,7 +108,6 @@ public class PlaceDetailsActivity extends Activity  {
 					"Loading. Please wait...", true);
 			nameTextView = (TextView) findViewById(R.id.TV_details_name);
 			descriptionTextView = (TextView) findViewById(R.id.TV_details_description);
-			capacityTextView = (TextView) findViewById(R.id.TV_details_capacity);
 			imageView = (ImageView) findViewById(R.id.IV_details_image);
 
 			if (googleMap == null) {
@@ -140,16 +149,16 @@ public class PlaceDetailsActivity extends Activity  {
 		protected void onPostExecute(JSONObject result) {
 			progressDialog.dismiss();
 			try {
+				// TODO: Visualize new data(website, phone number, open time)
+				// TODO: Hide make reservation online if restaurant does not support such option
 				String name = result.getString("name");
 				String description = result.getString("description");
-				String capacity = result.getString("capacity");
 				String imageData = result.getString("image");
 				JSONObject location = result.getJSONObject("location");
 				double longitude = location.getDouble("longitude");
 				double latitude = location.getDouble("latitude");
 				nameTextView.setText(name);
 				descriptionTextView.setText(description);
-				capacityTextView.setText(capacity);
 				byte[] imageAsBytes = Base64.decode(imageData.getBytes(),
 						Base64.DEFAULT);
 				imageView.setImageBitmap(BitmapFactory.decodeByteArray(
@@ -167,7 +176,6 @@ public class PlaceDetailsActivity extends Activity  {
 				googleMap.animateCamera(CameraUpdateFactory
 						.newCameraPosition(cameraPosition));
 			} catch (JSONException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}

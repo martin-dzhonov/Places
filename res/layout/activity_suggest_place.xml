@@ -12,7 +12,7 @@
             android:id="@+id/ET_add_place_name"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/ET_add_place_name" />
+            android:hint="@string/ET_add_reservation_name" />
 
         <EditText
             android:id="@+id/ET_add_place_description"

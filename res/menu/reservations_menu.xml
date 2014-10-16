@@ -1,21 +1,15 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.gerfield.places.HomeActivity" >
+    tools:context="com.gerfield.places.reservations.ReservationsActivity" >
 
-    
-    <item
-        android:id="@+id/action_reservations"
-        android:icon="@drawable/ic_action_reservations"
-        android:orderInCategory="100"
-        android:showAsAction="always"
-        android:title="@string/reservations_label"/>
     <item
         android:id="@+id/action_refresh"
         android:icon="@drawable/ic_action_refresh"
         android:orderInCategory="100"
         android:showAsAction="always"
         android:title="@string/refresh"/>
+    
     <item
         android:id="@+id/action_suggest_place"
         android:icon="@drawable/ic_action_suggest_place"

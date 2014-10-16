@@ -21,12 +21,6 @@
             android:layout_height="wrap_content"
             android:text="@string/TV_details_description" />
 
-        <TextView
-            android:id="@+id/TV_details_capacity"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="0" />
-
         <ImageView
             android:id="@+id/IV_details_image"
             android:layout_width="fill_parent"
@@ -40,10 +34,16 @@
             android:layout_height="300dp" />
 
         <Button
-            android:id="@+id/Btn_make_reservation"
+            android:id="@+id/Btn_note_reservation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/Btn_note_reservation" />
+
+        <Button
+            android:id="@+id/Btn_make_reservation_online"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="@string/Btn_make_reservation" />
+            android:text="@string/Btn_make_reservation_online" />
     </LinearLayout>
 
 </ScrollView>

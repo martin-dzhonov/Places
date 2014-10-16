@@ -12,7 +12,7 @@
             android:id="@+id/ET_reservation_name"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/ET_add_place_name" />
+            android:hint="@string/ET_add_reservation_name" />
 
         <TimePicker
             android:id="@+id/TP_reservation"
