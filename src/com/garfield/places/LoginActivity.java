@@ -220,7 +220,7 @@ public class LoginActivity extends Activity implements OnClickListener,
 			signOutFromGplus();
 			break;
 		case R.id.btn_continue:
-			Intent intent = new Intent(context, ChooseAccountTypeActivity.class);
+			Intent intent = new Intent(context, HomeActivity.class);
 			startActivity(intent);
 			break;
 		}

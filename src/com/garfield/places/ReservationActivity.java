@@ -50,7 +50,7 @@ public class ReservationActivity extends Activity {
 		setContentView(R.layout.activity_reservation);
 		Intent intent = getIntent();
 		info = intent.getExtras();
-		placeId = info.getString(DetailsActivity.PLACE_ID);
+		placeId = info.getString(PlaceDetailsActivity.PLACE_ID);
 		
 		initNumberPicker();
 		
@@ -58,7 +58,7 @@ public class ReservationActivity extends Activity {
 		placeButton.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
 				new EverlivePut().execute(placeId);
-				Intent intent = new Intent(context, HistoryActivity.class);
+				Intent intent = new Intent(context, ReservationsActivity.class);
 				startActivity(intent);
 			}
 		});
@@ -93,10 +93,10 @@ public class ReservationActivity extends Activity {
 			
 			int numberOfPeople = numberPicker.getValue();
 			
-			String placeName = info.getString(DetailsActivity.PLACE_NAME_KEY);
-			String capacity = info.getString(DetailsActivity.CAPACITY_KEY);
-			String description = info.getString(DetailsActivity.DESCRIPTION_KEY);
-			String image = info.getString(DetailsActivity.IMAGE_KEY);
+			String placeName = info.getString(PlaceDetailsActivity.PLACE_NAME_KEY);
+			String capacity = info.getString(PlaceDetailsActivity.CAPACITY_KEY);
+			String description = info.getString(PlaceDetailsActivity.DESCRIPTION_KEY);
+			String image = info.getString(PlaceDetailsActivity.IMAGE_KEY);
 			
 			saveReservationToSql(name, cal.getTime(), numberOfPeople, placeId, 
 					placeName, capacity, description, image);

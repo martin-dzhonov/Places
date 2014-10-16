@@ -7,12 +7,12 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.widget.ListView;
 
-public class HistoryActivity extends Activity {
+public class ReservationsActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_history);
+		setContentView(R.layout.activity_reservations);
 
 		ListView history = (ListView) this.findViewById(R.id.LV_history);
 
@@ -32,7 +32,7 @@ public class HistoryActivity extends Activity {
 	protected void onResume() {
 		// TODO Auto-generated method stub
 		super.onResume();
-		setContentView(R.layout.activity_history);
+		setContentView(R.layout.activity_reservations);
 
 		ListView history = (ListView) this.findViewById(R.id.LV_history);
 

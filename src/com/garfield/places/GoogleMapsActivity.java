@@ -13,7 +13,7 @@ import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-public class MainActivity extends Activity {
+public class GoogleMapsActivity extends Activity {
 
 	// Google Map
 	private GoogleMap googleMap;
@@ -21,7 +21,7 @@ public class MainActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_add_place);
+		setContentView(R.layout.activity_suggest_place);
 
 		try {
 			// Loading map

@@ -9,7 +9,6 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONObject;
 
-import android.app.ActionBar.LayoutParams;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -24,14 +23,12 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Base64;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.NumberPicker;
-import android.widget.PopupWindow;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -42,7 +39,7 @@ import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-public class AddPlaceActivity extends Activity implements OnClickListener {
+public class SuggestPlaceActivity extends Activity implements OnClickListener {
 
 	Context context = this;
 	static final int REQUEST_IMAGE_CAPTURE = 1;
@@ -56,20 +53,19 @@ public class AddPlaceActivity extends Activity implements OnClickListener {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_add_place);
+		setContentView(R.layout.activity_suggest_place);
 
 		// Sofia city centre coordinates
 		currLatitute = 42.6975100;
 		currLongitude = 23.3241500;
 
-		initNumberPicker();
 		initMap();
 		addImgButton = (Button) findViewById(R.id.Btn_add_place_img);
 		addImgButton.setOnClickListener(this);
 		addPhotoButton = (Button) findViewById(R.id.Btn_add_place_photo);
 		addPhotoButton.setOnClickListener(this);
 
-		final Button saveButton = (Button) findViewById(R.id.Btn_save_place);
+		final Button saveButton = (Button) findViewById(R.id.Btn_suggest_place);
 		saveButton.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
 				new EverlivePost().execute();
@@ -80,11 +76,12 @@ public class AddPlaceActivity extends Activity implements OnClickListener {
 	@Override
 	public void onClick(View v) {
 		if (v.getId() == R.id.Btn_add_place_img) {
-			Intent i = new Intent(
+			Intent addImageIntent = new Intent(
 					Intent.ACTION_PICK,
 					android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-			startActivityForResult(i, IMAGE_PICKER_SELECT);
+			startActivityForResult(addImageIntent, IMAGE_PICKER_SELECT);
 		}
+		
 		if (v.getId() == R.id.Btn_add_place_photo) {
 			Intent takePictureIntent = new Intent(
 					MediaStore.ACTION_IMAGE_CAPTURE);
@@ -93,25 +90,7 @@ public class AddPlaceActivity extends Activity implements OnClickListener {
 	}
 
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
-		if (requestCode == IMAGE_PICKER_SELECT
-				&& resultCode == Activity.RESULT_OK) {
-			Uri selectedImage = data.getData();
-			String[] filePathColumn = { MediaStore.Images.Media.DATA };
-
-			Cursor cursor = getContentResolver().query(selectedImage,
-					filePathColumn, null, null, null);
-			cursor.moveToFirst();
-
-			int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
-			String filePath = cursor.getString(columnIndex);
-			cursor.close();
-
-			Bitmap yourSelectedImage = BitmapFactory.decodeFile(filePath);
-
-			ImageView iView = (ImageView) findViewById(R.id.IV_add_image);
-			iView.setImageBitmap(yourSelectedImage);
-		}
-		if (requestCode == REQUEST_IMAGE_CAPTURE
+		if ((requestCode == IMAGE_PICKER_SELECT || requestCode == REQUEST_IMAGE_CAPTURE)
 				&& resultCode == Activity.RESULT_OK) {
 			Uri selectedImage = data.getData();
 			String[] filePathColumn = { MediaStore.Images.Media.DATA };
@@ -139,13 +118,6 @@ public class AddPlaceActivity extends Activity implements OnClickListener {
 		String imageEncoded = Base64.encodeToString(b, Base64.DEFAULT);
 
 		return imageEncoded;
-	}
-
-	private void initNumberPicker() {
-		NumberPicker np = (NumberPicker) findViewById(R.id.NP_add_place);
-		np.setMaxValue(1000);
-		np.setMinValue(1);
-		np.setValue(30);
 	}
 
 	private void initMap() {
@@ -213,8 +185,7 @@ public class AddPlaceActivity extends Activity implements OnClickListener {
 			namEditText = (EditText) findViewById(R.id.ET_add_place_name);
 			descEditText = (EditText) findViewById(R.id.ET_add_place_description);
 			imageView = (ImageView) findViewById(R.id.IV_add_image);
-			nPicker = (NumberPicker) findViewById(R.id.NP_add_place);
-			progressDialog = ProgressDialog.show(AddPlaceActivity.this, "",
+			progressDialog = ProgressDialog.show(SuggestPlaceActivity.this, "",
 					"Saving. Please wait...", true);
 		}
 
@@ -244,7 +215,7 @@ public class AddPlaceActivity extends Activity implements OnClickListener {
 				String imageData = encodeTobase64(bitmap);
 				obj.put("image", imageData);
 
-				obj.put("capacity", String.valueOf(nPicker.getValue()));
+				obj.put("capacity", String.valueOf(0));
 
 				HttpClient httpclient = new DefaultHttpClient();
 

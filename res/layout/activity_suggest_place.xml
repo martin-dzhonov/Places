@@ -20,18 +20,6 @@
             android:layout_height="wrap_content"
             android:hint="@string/ET_add_place_desription" />
 
-        <TextView
-            android:id="@+id/TV_add_place_np"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/TV_add_place_np"
-            android:textSize="20sp" />
-
-        <NumberPicker
-            android:id="@+id/NP_add_place"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
         <ImageView
             android:id="@+id/IV_add_image"
             android:layout_width="wrap_content"
@@ -58,10 +46,10 @@
         
 
         <Button
-            android:id="@+id/Btn_save_place"
+            android:id="@+id/Btn_suggest_place"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="@string/Btn_save_place" />
+            android:text="@string/Btn_suggest_place" />
     </LinearLayout>
 
 </ScrollView>

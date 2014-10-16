@@ -14,43 +14,44 @@ import org.json.JSONObject;
 import com.garfield.places.R;
 
 import android.app.Activity;
-import android.app.ListActivity;
 import android.app.ProgressDialog;
-import android.content.ClipData.Item;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
-import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 
 public class HomeActivity extends Activity {
 	public final static String EXTRA_PLACE_NAME = "com.example.myfirstapp.EXTRA_PLACE_NAME";
 	public final static String EXTRA_PLACE_ID = "com.example.myfirstapp.EXTRA_PLACE_ID";
+	
 	private Context context = this;
+	
 	GridView MyGrid;
 	ArrayList<Place> places = new ArrayList<Place>();
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_home);
+		
 		MyGrid = (GridView) findViewById(R.id.gridView1);
+		
 		new PopulatePlacesTask().execute();
+		
 		MyGrid.setOnItemClickListener(new OnItemClickListener() {
 			public void onItemClick(AdapterView parent, View v, int position, long id)
 			{
-				Intent intent = new Intent(context, DetailsActivity.class);
-				String message = places.get(position).getId();
-				intent.putExtra(EXTRA_PLACE_ID, message);
+				Intent intent = new Intent(context, PlaceDetailsActivity.class);
+				String placeId = places.get(position).getId();
+				intent.putExtra(EXTRA_PLACE_ID, placeId);
 				startActivity(intent);
 			}
 		});
@@ -60,10 +61,6 @@ public class HomeActivity extends Activity {
 	public boolean onCreateOptionsMenu(Menu menu) {
 		MenuInflater inflater = getMenuInflater();
 		inflater.inflate(R.menu.home, menu);
-
-		if (AccountGeneral.ACCOUNT_TYPE_CUSTOMER == AccountGeneral.USER_ACCOUNT_TYPE) {
-			menu.findItem(R.id.action_create_place).setVisible(false);
-		}
 		return true;
 	}
 
@@ -71,14 +68,14 @@ public class HomeActivity extends Activity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 		// action with ID action_refresh was selected
-		case R.id.action_create_place:
-			Intent addPlaceIntent = new Intent(context, AddPlaceActivity.class);
-			startActivity(addPlaceIntent);
+		case R.id.action_suggest_place:
+			Intent suggestPlaceIntent = new Intent(context, SuggestPlaceActivity.class);
+			startActivity(suggestPlaceIntent);
 			break;
 		// action with ID action_settings was selected
-		case R.id.action_history:
-			Intent historyIntent = new Intent(context, HistoryActivity.class);
-			startActivity(historyIntent);
+		case R.id.action_reservations:
+			Intent reservationsIntent = new Intent(context, ReservationsActivity.class);
+			startActivity(reservationsIntent);
 			break;
 		case R.id.action_refresh:
 			new PopulatePlacesTask().execute();

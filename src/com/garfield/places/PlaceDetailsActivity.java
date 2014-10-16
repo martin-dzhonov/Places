@@ -39,7 +39,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class DetailsActivity extends Activity  {
+public class PlaceDetailsActivity extends Activity  {
 	private TextView nameTextView;
 	private TextView descriptionTextView;
 	private TextView capacityTextView;
@@ -54,7 +54,7 @@ public class DetailsActivity extends Activity  {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_details);
+		setContentView(R.layout.activity_place_details);
 
 		Intent intent = getIntent();
 		final String placeId = intent.getStringExtra(HomeActivity.EXTRA_PLACE_ID);
@@ -94,7 +94,7 @@ public class DetailsActivity extends Activity  {
 		private GoogleMap googleMap;
 
 		protected void onPreExecute() {
-			progressDialog = ProgressDialog.show(DetailsActivity.this, "",
+			progressDialog = ProgressDialog.show(PlaceDetailsActivity.this, "",
 					"Loading. Please wait...", true);
 			nameTextView = (TextView) findViewById(R.id.TV_details_name);
 			descriptionTextView = (TextView) findViewById(R.id.TV_details_description);
